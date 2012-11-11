@@ -365,6 +365,7 @@ button, .button,
 	font-weight: bold;
 	background: @grayA;
 	color: @grayF;
+	border: 0;
 	text-decoration: none; 
 	cursor: pointer;
 	-webkit-transition-property: background-color, color;
@@ -836,46 +837,6 @@ footer.entry-meta {
 }
 
 
-/* home */
-
-/* Tab UI modifications MP */
-.sws-tabs.ui-tabs .ui-tabs-nav li a {
-	padding: .2em 1em;
-	line-height: 24px;
-	color: #666;
-}
-.sws-tabs.ui-tabs .ui-tabs-nav li {
-	border-radius: 5px 5px 0 0;
-}
-.sws-tabs.ui-tabs .ui-tabs-nav {
-	min-height: 41px;
-	height:auto;
-}
-.sws-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
-	color: black;
-	border-radius: 5px 5px 0 0;
-}
-
-/* All news  MP */
-
-.smm-item .entry-meta {
-	float: right;
-	margin-top: -20px;
-}
-
-/* Blog Accordian  MP */
-
-
-.ui-state-active, .ui-widget-content .ui-state-active {
-	border-radius: 5px 5px 0 0;
-	border-bottom: none;
-}
-.ui-accordion-content.ui-helper-reset.ui-widget-content.ui-corner-bottom.ui-accordion-content-active {
-	border-top: none;
-	border-radius: 0 0 5px 5px;
-}
-
-
 
 /* map */
 
@@ -1153,19 +1114,19 @@ footer.entry-meta {
 .ui-widget {.sans; font-size: 14px; }
 .ui-widget .ui-widget { font-size: 14px; }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {.sans; font-size: 14px; }
-.ui-widget-content { border: 0; background: #FFF; color: #222; }
-.ui-widget-content a { color: #222; }
+.ui-widget-content { border: 0!important; background: #FFFAF0!important; color: @grayA; }
+.ui-widget-content a { color: @grayA; }
 .ui-widget-header { border: 0; background: #999; color: #FFF; font-weight: bold; }
 .ui-widget-header a { color: #FFF; }
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 0; background: transparent; font-weight: normal; color: #555555; }
-.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #555555; text-decoration: none; }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 0; background: @yellow; font-weight: normal; color: #212121; }
-.ui-state-hover a, .ui-state-hover a:hover { color: #212121; text-decoration: none; }
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 0; background: #FFF; font-weight: normal; color: #212121; }
-.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #212121; text-decoration: none; }
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 0; background: transparent!important; font-weight: normal; color: @white; }
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: @white; text-decoration: none; background: transparent!important;}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 0; background: @yellow; font-weight: normal; color: @white; }
+.ui-state-hover a, .ui-state-hover a:hover { color: @white; text-decoration: none; background: @yellow;}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 0; background: #FFF; font-weight: normal; color: @white; }
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: @white; text-decoration: none; }
 .ui-widget :active { outline: none; }
 
 /* Interaction Cues
@@ -1180,13 +1141,13 @@ footer.entry-meta {
 .ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
 
 /* Tabs widget */
-.ui-tabs { position: relative; padding: 0; zoom: 1; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
-.ui-tabs .ui-tabs-nav { margin: 0; padding: 0; background: #999; height: 36px;}
-.ui-tabs .ui-tabs-nav li { list-style: none; float: left; position: relative; top: 0; margin: 0; border-bottom: 0 !important; padding: 0; white-space: nowrap; line-height: 36px; font-size: 24px; .condensed;  }
-.ui-tabs .ui-tabs-nav li a { float: left; padding: .5em 1em; text-decoration: none; color: #FFF; }
+.ui-tabs { position: relative; padding: 0; zoom: 1; padding: 0; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+.ui-tabs .ui-tabs-nav { margin: 0; padding: 0!important; background: #999; height: 36px; border: 0!important;}
+.ui-tabs .ui-tabs-nav li { list-style: none; float: left; position: relative; top: 0; margin: 0; border-bottom: 0 !important; padding: 0; white-space: nowrap; line-height: 36px; font-size: 24px; .condensed;  border-right: 1px;}
+.ui-tabs .ui-tabs-nav li a { float: left; padding: 0 25px!important; line-height: 36px; text-decoration: none; color: #FFF; }
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected { margin-bottom: 0; padding-bottom: 0; }
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; background: @yellow; }
-.ui-tabs .ui-tabs-panel { display: block; border-width: 0; padding: 0; background: #FFFAF0; }
+.ui-tabs .ui-tabs-panel { display: block; border-width: 0; padding: 0!important; background: #FFFAF0; }
 .ui-tabs .ui-tabs-hide { display: none !important; }
 
 /* Corner radius */
@@ -1199,8 +1160,50 @@ footer.entry-meta {
 .ui-corner-right,
 .ui-corner-left,
 .ui-corner-all {
-	.border-radius();
+	.border-radius(0)!important;
 }
+
+
+.ui-tabs .ui-tabs-nav li {
+	top: 0!important;
+	margin: 0!important;
+	border: 0!important;
+	padding: 0!important;
+	border-radius: 0!important;
+}
+
+.ui-tabs iframe {
+	margin-left: 50px;
+}
+
+
+.sws-tabs.ui-tabs .ui-tabs-nav {
+	height:auto;
+}
+.sws-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
+	color: black;
+	border-radius: 0;
+}
+
+/* All news  MP */
+
+.smm-item .entry-meta {
+	float: right;
+	margin-top: -20px;
+}
+
+/* Blog Accordian  MP */
+
+
+.ui-state-active, .ui-widget-content .ui-state-active {
+	border-radius: 5px 5px 0 0;
+	border-bottom: none;
+}
+.ui-accordion-content.ui-helper-reset.ui-widget-content.ui-corner-bottom.ui-accordion-content-active {
+	border-top: none;
+	border-radius: 0 0 5px 5px;
+}
+
 
 
 
