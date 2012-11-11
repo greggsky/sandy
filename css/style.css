@@ -396,6 +396,10 @@ blockquote:after {
   top: 25px;
   text-indent: 0;
 }
+blockquote p {
+  font-size: 18px;
+  margin: 0;
+}
 cite {
   font-size: 12px;
   text-align: right;
@@ -486,6 +490,8 @@ button,
   color: #eeeeee;
   text-decoration: none;
   cursor: pointer;
+  -webkit-transition-property: background-color, color;
+  -webkit-transition-duration: 100ms;
 }
 button:hover,
 .button:hover,
@@ -498,10 +504,227 @@ button:hover,
 .btnAlert:active,
 .btnAlert:visited {
   background: #da521f;
+  color: #ffffff;
 }
-.btnSmall {
-  border: 1px solid #0085bf;
-  color: #0085bf;
+.btnSmall,
+.btnSmall:active,
+.btnSmall:visited {
+  background: #0085bf;
+  color: #ffffff;
+}
+.edit-link {
+  float: right;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.2em;
+  font-weight: bold;
+  border-bottom: 2px solid #0085bf;
+}
+/******* JQUERY UI OVERRIDES *******/
+/* Component containers
+----------------------------------*/
+.ui-widget {
+  font-family: "Open Sans", "Lucida Grande", "Lucida Sans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+}
+.ui-widget .ui-widget {
+  font-size: 14px;
+}
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+  font-family: "Open Sans", "Lucida Grande", "Lucida Sans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+}
+.ui-widget-content {
+  border: 0;
+  background: #FFF;
+  color: #222;
+}
+.ui-widget-content a {
+  color: #222;
+}
+.ui-widget-header {
+  border: 0;
+  background: #999;
+  color: #FFF;
+  font-weight: bold;
+}
+.ui-widget-header a {
+  color: #FFF;
+}
+/* Interaction states
+----------------------------------*/
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+  border: 0;
+  background: transparent;
+  font-weight: normal;
+  color: #555555;
+}
+.ui-state-default a,
+.ui-state-default a:link,
+.ui-state-default a:visited {
+  color: #555555;
+  text-decoration: none;
+}
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+  border: 0;
+  background: #ffcd67;
+  font-weight: normal;
+  color: #212121;
+}
+.ui-state-hover a,
+.ui-state-hover a:hover {
+  color: #212121;
+  text-decoration: none;
+}
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+  border: 0;
+  background: #FFF;
+  font-weight: normal;
+  color: #212121;
+}
+.ui-state-active a,
+.ui-state-active a:link,
+.ui-state-active a:visited {
+  color: #212121;
+  text-decoration: none;
+}
+.ui-widget :active {
+  outline: none;
+}
+/* Interaction Cues
+----------------------------------*/
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+  border: 0;
+  background: #ffcd67;
+  color: #ffffff;
+}
+.ui-state-highlight a,
+.ui-widget-content .ui-state-highlight a,
+.ui-widget-header .ui-state-highlight a {
+  color: #ffffff;
+}
+.ui-state-error,
+.ui-widget-content .ui-state-error,
+.ui-widget-header .ui-state-error {
+  border: 0;
+  background: #FFF;
+  color: #da521f;
+}
+.ui-state-error a,
+.ui-widget-content .ui-state-error a,
+.ui-widget-header .ui-state-error a {
+  color: #da521f;
+}
+.ui-state-error-text,
+.ui-widget-content .ui-state-error-text,
+.ui-widget-header .ui-state-error-text {
+  color: #da521f;
+}
+.ui-priority-primary,
+.ui-widget-content .ui-priority-primary,
+.ui-widget-header .ui-priority-primary {
+  font-weight: bold;
+}
+.ui-priority-secondary,
+.ui-widget-content .ui-priority-secondary,
+.ui-widget-header .ui-priority-secondary {
+  opacity: .7;
+  filter: alpha(opacity=70);
+  font-weight: normal;
+}
+.ui-state-disabled,
+.ui-widget-content .ui-state-disabled,
+.ui-widget-header .ui-state-disabled {
+  opacity: .35;
+  filter: alpha(opacity=35);
+  background-image: none;
+}
+/* Tabs widget */
+.ui-tabs {
+  position: relative;
+  padding: 0;
+  zoom: 1;
+}
+/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+.ui-tabs .ui-tabs-nav {
+  margin: 0;
+  padding: 0;
+  background: #999;
+  height: 36px;
+}
+.ui-tabs .ui-tabs-nav li {
+  list-style: none;
+  float: left;
+  position: relative;
+  top: 0;
+  margin: 0;
+  border-bottom: 0 !important;
+  padding: 0;
+  white-space: nowrap;
+  line-height: 36px;
+  font-size: 24px;
+  font-family: "LeagueGothicRegular", "Arial Narrow", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.ui-tabs .ui-tabs-nav li a {
+  float: left;
+  padding: .5em 1em;
+  text-decoration: none;
+  color: #FFF;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a,
+.ui-tabs .ui-tabs-nav li.ui-state-disabled a,
+.ui-tabs .ui-tabs-nav li.ui-state-processing a {
+  cursor: text;
+  background: #ffcd67;
+}
+.ui-tabs .ui-tabs-panel {
+  display: block;
+  border-width: 0;
+  padding: 0;
+  background: #FFFAF0;
+}
+.ui-tabs .ui-tabs-hide {
+  display: none !important;
+}
+/* Corner radius */
+.ui-corner-tl,
+.ui-corner-tr,
+.ui-corner-bl,
+.ui-corner-br,
+.ui-corner-top,
+.ui-corner-bottom,
+.ui-corner-right,
+.ui-corner-left,
+.ui-corner-all {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  behavior: url(../js/PIE.htc);
 }
 /******* FORMS *******/
 /* from skeleton.js */
@@ -653,60 +876,6 @@ dt {
 .sub-menu li:hover a {
   background: #aaaaaa;
 }
-.tabs {
-  *zoom: 1;
-  zoom: 1;
-  padding: 25px 0 0;
-  margin: 0;
-  list-style: none;
-}
-.tabs:before,
-.tabs:after {
-  content: "";
-  display: table;
-}
-.tabs:after {
-  clear: both;
-}
-.tabs:before {
-  content: "\0020";
-  display: block;
-  height: 0;
-  overflow: hidden;
-}
-.tabs:after {
-  content: "\0020";
-  display: block;
-  height: 0;
-  overflow: hidden;
-  clear: both;
-}
-.tabs li {
-  display: -moz-inline-stack;
-  display: inline-block;
-  zoom: 1;
-  *display: inline;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 6px 15px;
-  margin-right: 6px;
-  background: #eeeeee;
-}
-.tabs li.on,
-.tabs li:hover {
-  color: #FFF;
-  background: #222222;
-}
-.tabPage {
-  border-top: 1px solid #555555;
-  border-bottom: 1px solid #555555;
-  padding: 20px 0;
-  margin: 0 0 20px;
-  display: none;
-}
-.tabPage:first-child {
-  display: block;
-}
 hr {
   background-color: #ccc;
   border: 0;
@@ -840,6 +1009,8 @@ hr {
   color: #ffffff;
   display: block;
   padding: 0 20px;
+  -webkit-transition-property: background-color;
+  -webkit-transition-duration: 100ms;
 }
 #menu-local-menu a:hover,
 #menu-local-menu .current-menu-item a {
@@ -859,7 +1030,7 @@ hr {
   padding-bottom: 25px;
 }
 .entry-title {
-  margin-top: .5em;
+  display: none;
 }
 .entry-date {
   font-style: italic;
@@ -868,28 +1039,39 @@ hr {
 .entry-summary {
   margin-bottom: 2em;
 }
-.sws-tabs {
-  border-top: 1px solid #aaaaaa;
-  border-bottom: 1px solid #aaaaaa;
-}
 footer.entry-meta {
   color: #aaaaaa;
   font-size: 12px;
 }
-.emailForm {
-  margin: 20px 0 20px;
+.email-form {
   border-top: 1px dotted #555555;
   border-bottom: 1px dotted #555555;
-  padding: 20px 0 0;
+  padding: 15px 10px 30px;
+  margin: 25px 0;
   text-align: left;
 }
-.main {
-  display: inline;
+.email-form label {
+  font-weight: 400;
+}
+.email-form .edit-value {
+  background: #eeeeee;
+  padding: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  behavior: url(../js/PIE.htc);
+  margin: 3px 0 5px;
+}
+.email-form input[type="text"] {
+  margin: 0;
+  width: 100%;
+}
+.social-title {
+  margin: 0;
+}
+.social-title span {
   float: left;
-  width: 72.91666666666666%;
-  margin: 0 1.0416666666666665%;
-  padding: 30px 30px 30px 20px;
-  background: #ffffff;
+  margin-right: 10px;
 }
 .social a {
   font-size: 40px;
@@ -1034,27 +1216,59 @@ footer.entry-meta {
   background: #ffffff;
   padding: 25px;
 }
-.container {
+/* filters */
+.options-container {
+  float: left;
+  list-style: none;
+  margin-left: 25px;
+}
+.options-container li {
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  margin-right: -4px;
+  border-right: 1px dotted #ffffff;
+}
+.options-container a {
+  display: block;
+  padding: 3px 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.2em;
+  font-size: 12px;
+  background: #0085bf;
+  color: #ffffff;
+}
+.options-container a:hover {
+  background: #555555;
+}
+.options-container .filter-class.selected {
+  background-color: #222222;
+  color: #ffffff;
+}
+.isotope {
   background: #eeeeee;
-  padding: 20px;
+  padding: 25px;
   *zoom: 1;
   zoom: 1;
+  clear: both;
 }
-.container:before,
-.container:after {
+.isotope:before,
+.isotope:after {
   content: "";
   display: table;
 }
-.container:after {
+.isotope:after {
   clear: both;
 }
-.container:before {
+.isotope:before {
   content: "\0020";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.container:after {
+.isotope:after {
   content: "\0020";
   display: block;
   height: 0;
@@ -1112,6 +1326,7 @@ footer.entry-meta {
   letter-spacing: 1px;
   line-height: 1.1em;
   padding-top: 4px;
+  margin-top: 10px;
 }
 .cardAddress {
   text-transform: uppercase;
@@ -1122,14 +1337,17 @@ footer.entry-meta {
 .cardUpdated {
   font-style: italic;
   margin-top: -6px;
+  font-size: 14px;
 }
 .cardStatus {
   color: #da521f;
+  font-size: 15px;
 }
 .cardTimes,
 .cardContact,
 .cardLink {
   font-weight: bold;
+  font-size: 14px;
 }
 .cardTimes span,
 .cardContact span,
@@ -1200,37 +1418,17 @@ footer.entry-meta {
 .dropoff .cardType {
   background: #22b573;
 }
-.both .cardType {
+.dropoff.volunteer .cardType {
   background: #00a99d;
 }
 .unknown .cardType {
-  background: #555555;
+  background: #aaaaaa;
+}
+.FNB .cardType {
+  background: #222222;
 }
 .tile-always-display .cardType {
   background: #ffcd67;
-}
-/* filters */
-.options-container {
-  float: left;
-  list-style: none;
-}
-.options-container li {
-  display: -moz-inline-stack;
-  display: inline-block;
-  zoom: 1;
-  *display: inline;
-}
-.options-container a {
-  background: #eeeeee;
-  display: block;
-  padding: 5px 15px;
-}
-.options-container .filter-class.selected {
-  background-color: #000000;
-  color: white;
-}
-.container {
-  clear: both;
 }
 .isotope-item {
   z-index: 2;

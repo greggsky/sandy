@@ -96,12 +96,12 @@ function foghorn_head_css() {
 		$output = '';
 		
 		if ( of_get_option('menu_position') ) {
-			$output .= "#access {clear:both; float:left;}\n";
-			$output .= "#access li {margin-left:0; margin-right:2.8em;}\n";
+			$output .= "#access {}\n";
+			$output .= "#access li {}\n";
 		}
 		
 		if ( of_get_option('tagline') ) {
-			$output .= "#access {margin-top:25px;}\n";
+			$output .= "#access {}\n";
 		}
 		
 		// Output styles
