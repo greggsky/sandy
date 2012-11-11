@@ -483,7 +483,7 @@ button,
   text-transform: uppercase;
   letter-spacing: 1px;
   line-height: 1.2em;
-  padding: 10px 10px;
+  padding: 10px 15px;
   text-align: center;
   font-weight: bold;
   background: #222222;
@@ -511,6 +511,8 @@ button:hover,
 .btnSmall:visited {
   background: #0085bf;
   color: #ffffff;
+  padding: 8px 12px;
+  font-size: 12px;
 }
 .edit-link {
   float: right;
@@ -535,6 +537,8 @@ button:hover,
 #respond input[type="reset"] {
   background: #0085bf;
   color: #ffffff;
+  padding: 8px 12px;
+  font-size: 12px;
 }
 /******* FORMS *******/
 /******* LISTS *******/
