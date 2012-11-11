@@ -403,6 +403,10 @@ button, .button,
 #respond {
 	background: @grayF;
 	padding: 5px 15px;
+	margin-top: 30px;
+	.reply-title {
+		.caps;
+	}
 	textarea {
 		width: 100%;
 	}
@@ -411,6 +415,9 @@ button, .button,
 	}
 	input[type="button"], input[type="submit"], input[type="reset"] {
 		.btnSmall;
+		.caps;
+		font-weight: bold;
+		.border-radius();
 	}
 }
 
