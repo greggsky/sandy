@@ -733,6 +733,9 @@ hr {
   background: #ffffff;
   padding: 20px 30px 40px;
 }
+.layout-1c #primary {
+  padding: 20px 0 0;
+}
 .layout-2cl #primary {
   width: 75%;
   float: right;
@@ -1100,8 +1103,7 @@ footer.entry-meta {
   font-weight: 700;
   color: #ffffff;
   padding: 0 15px;
-  margin-left: -15px;
-  margin-right: -15px;
+  margin: 0 -15px;
   height: 32px;
   line-height: 32px;
   background-repeat: no-repeat;
@@ -1214,9 +1216,21 @@ footer.entry-meta {
 /* filters */
 .options-container {
   float: left;
+  list-style: none;
+}
+.options-container li {
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.options-container a {
+  background: #eeeeee;
+  display: block;
+  padding: 5px 15px;
 }
 .options-container .filter-class.selected {
-  background-color: black;
+  background-color: #000000;
   color: white;
 }
 .container {
