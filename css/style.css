@@ -1,11 +1,4 @@
 @import 'stateface.css';
-/*
-Theme Name: Sandy
-Author: Occupy
-Author URI: http://occupy.net
-Description: Based on Foghorn, a minimalist theme built off the foundation of Twenty Eleven.
-
-*/
 body {
   width: 100%;
   *zoom: 1;
@@ -942,6 +935,9 @@ footer.entry-meta {
   padding: 20px;
 }
 /* widgets */
+.widget-title {
+  display: none;
+}
 /******* UNIQUE PAGES *******/
 /* 404 */
 .error404 #main #searchform {
