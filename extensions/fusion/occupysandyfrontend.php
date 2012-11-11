@@ -3,7 +3,8 @@ class OccupySandyCard {
 	private $row = array();
 	private $cols = array();
 	private $cardTitle;
-	private $cardClass;
+	private $cardClasses;
+	private $regionClasses;
 
 	function __construct ($row = array(), $cols = array()) {
 		$this->row = $row;
@@ -11,28 +12,51 @@ class OccupySandyCard {
 
 		$this->parseData();
 
-		$this->cardClass = apply_filters('occupysandy_card_class', $this->cardClass, $this);
+		$this->cardClasses = apply_filters('occupysandy_card_classes', $this->cardClasses, $this);
 		$this->cardTitle = apply_filters('occupysandy_card_title', $this->cardTitle, $this);
 	}
 
 	function parseData () {
-		$this->cardClass = 'unknown';
+		$this->cardClass = array();
+		$this->cardTitle = '';
 
 		if ($this->is_distro_center()) :
-			$this->cardClass = 'hub';
+			$this->cardClasses[] = 'hub';
 			$this->cardTitle = 'Main Distribution Center';
-		elseif ($this->is_drop_off()) :
-			$this->cardClass = ($this->is_volunteer() ? 'both' : 'dropoff');
+		endif;
+		
+		if ($this->is_drop_off()) :
+			$this->cardClasses[] = 'dropoff';
 			$this->cardTitle = 'Drop-Off '.($this->is_volunteer() ? '+ Volunteer' : 'Only');
-		elseif ($this->is_volunteer()) :
-			$this->cardClass = 'volunteer';
-			$this->cardTitle = 'Volunteer Only';
-		else :
+		endif;
+
+		if ($this->is_volunteer()) :
+			$this->cardClasses[] = 'volunteer';
+			
+			if (strlen($this->cardTitle) < 1) :
+				$this->cardTitle = 'Volunteer Only';
+			endif;
+		endif;
+
+		if (strlen($this->cardTitle) < 1) :	
 			if (strlen($this->field('type')) > 0) :
 				$this->cardTitle = $this->field('type');
 			else :
 				$this->cardTitle = 'Unknown';
 			endif;
+		endif;
+
+		if (count($this->cardClasses) == 0) :
+			$this->cardClasses[] = 'unknown';
+		endif;
+
+		
+		$this->regionClasses = array();
+		$region = $this->field('Region');
+		if (strlen($region) > 0) :
+			$this->regionClasses[$region] = 'region-'.sanitize_title($region);
+		else :
+			$this->regionClasses['Other'] = 'region-other';
 		endif;
 	}
 
@@ -100,7 +124,9 @@ class OccupySandyCard {
 		return $ret;
 	}
 
-	function get_card_class () { return $this->cardClass; }
+	function get_type_classes () { return $this->cardClasses; }
+	function get_region_classes () { return $this->regionClasses; }
+	function get_card_class () { return implode(" ", array_merge($this->get_type_classes(), $this->get_region_classes())); }
 	function get_card_heading () { return $this->cardTitle; }
 	function get_title () { return $this->field('Title'); }
 	function get_address () { return $this->field('Address'); }
@@ -154,5 +180,39 @@ function the_occupy_sandy_cards ($params = array()) {
 }
 
 function get_the_occupy_sandy_card () { global $OccupySandyCard; return $OccupySandyCard; }
+
+function get_occupy_sandy_possible_values_for ($fieldName, $params = array()) {
+	$cards = get_occupy_sandy_cards($params);
+	$ret = array();
+	foreach ($cards as $card) :
+		$value = NULL;
+		if (method_exists($card, $fieldName)) :
+			$value = $card->{$fieldName}();
+		endif;
+
+		if (!is_array($value)) :
+			if (is_null($value)) :
+				$value = array();
+			else :
+				$value = array($value);
+			endif;
+		endif;
+
+		if (count($value) == 0) :
+			$value[] = $card->field($fieldName);
+		endif;
+
+		foreach ($value as $idx => $v) :
+			if (!is_numeric($idx)) :
+				$i = urlencode($idx) . '/' . urlencode($v);
+			else :
+				$i = urlencode($v);
+			endif;
+			if (!isset($ret[$i])) : $ret[$i] = 0; endif;
+			$ret[$i] += 1;
+		endforeach;
+	endforeach;
+	return $ret;
+}
 
 
