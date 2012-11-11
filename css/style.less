@@ -713,18 +713,28 @@ footer.entry-meta {
 
 /* footer */
 
-#colophon {
+#interoccupy {
 	clear: both;
 	border-top: 1px solid @grayD;
+	.about, .events {
+		padding: 25px 0 25px 25px;
+	}
+	.contact {
+		padding: 25px;		
+	}
+}
+
+#colophon {
+	clear: both;
 }
 
 #site-generator {
 	background: @black;
-	color: @grayD;
+	color: @grayC;
 	padding: 5px 25px 10px;
 	.small;
 	a {
-		color: @grayD;
+		color: @grayC;
 		font-weight: 400;
 		&:hover {
 			color: @white;

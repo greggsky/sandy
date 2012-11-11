@@ -827,18 +827,28 @@ footer.entry-meta {
   padding: 10px;
 }
 /* footer */
-#colophon {
+#interoccupy {
   clear: both;
   border-top: 1px solid #bbbbbb;
 }
+#interoccupy .about,
+#interoccupy .events {
+  padding: 25px 0 25px 25px;
+}
+#interoccupy .contact {
+  padding: 25px;
+}
+#colophon {
+  clear: both;
+}
 #site-generator {
   background: #000000;
-  color: #bbbbbb;
+  color: #aaaaaa;
   padding: 5px 25px 10px;
   font-size: 12px;
 }
 #site-generator a {
-  color: #bbbbbb;
+  color: #aaaaaa;
   font-weight: 400;
 }
 #site-generator a:hover {
