@@ -1,5 +1,7 @@
 @import 'grid.less';
-@import 'stateface.css';
+	/* I know this syntax makes no sense but on my localhost on Chrome, the above import worked fine and the below import needed the path specified. Maybe .less files import .less files assuming the same directory but not .css files? MP */
+@import 'wp-content/themes/sandy/css/stateface.css';
+
 
 /******* GRID *******/
 /* from semantic.gs */
@@ -21,6 +23,18 @@
 
 /* apply a natural box layout model to all elements */
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+
+/**** TEST - Just needed a clear way to know that this was being processed successfully *****/
+
+/*
+@test_color: #097009;
+
+body #page {
+  background-color: @test_color;
+}
+*/
+
 
 
 
@@ -83,6 +97,8 @@
 
 
 /* structure */
+
+
 
 .left {float: left; }
 .right {float: right; }
@@ -775,6 +791,7 @@ footer.entry-meta {
 	}
 }
 
+
 .about {
 	.column(6);
 	padding: 20px;
@@ -820,6 +837,43 @@ footer.entry-meta {
 
 
 /* home */
+
+/* Tab UI modifications MP */
+.sws-tabs.ui-tabs .ui-tabs-nav li a {
+	padding: .2em 1em;
+	line-height: 24px;
+	color: #666;
+}
+.sws-tabs.ui-tabs .ui-tabs-nav li {
+	border-radius: 5px 5px 0 0;
+}
+.sws-tabs.ui-tabs .ui-tabs-nav {
+	min-height: 41px;
+	height:auto;
+}
+.sws-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
+	color: black;
+	border-radius: 5px 5px 0 0;
+}
+
+/* All news  MP */
+
+.smm-item .entry-meta {
+	float: right;
+	margin-top: -20px;
+}
+
+/* Blog Accordian  MP */
+
+
+.ui-state-active, .ui-widget-content .ui-state-active {
+	border-radius: 5px 5px 0 0;
+	border-bottom: none;
+}
+.ui-accordion-content.ui-helper-reset.ui-widget-content.ui-corner-bottom.ui-accordion-content-active {
+	border-top: none;
+	border-radius: 0 0 5px 5px;
+}
 
 
 
@@ -921,9 +975,10 @@ footer.entry-meta {
 .card {
 	float: left;
 	width: 300px;
-	margin: 0 15px 15px 0;
+	margin: 15px 15px 15px 20px;
 	padding: 0 15px 10px;
 	background: @white;
+	box-shadow: 3px 3px 25px -10px black; /*MP*/
 	h1, h2, h5, p {
 		margin-bottom: 10px;
 	}
