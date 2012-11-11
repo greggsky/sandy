@@ -160,7 +160,15 @@ function isotope_scriptage () {
 			} else {
 				isotopeFilter[filterAxis] = '.' + filterClass;
 			}
-			jQuery(isotopeContainer).isotope({ filter: filterSelector(isotopeFilter) + ", .tile-always-display" }).isotope('reLayout');
+
+			// sigh
+			var combinedFilters = filterSelector(isotopeFilter);
+			if (combinedFilters.length > 0) {
+				// If there is a filter on here, we should also add in the always-displayed tile.
+				combinedFilters += ", .tile-always-display";
+			} /* if */
+
+			jQuery(isotopeContainer).isotope({ filter: combinedFilters }).isotope('reLayout');
 
 			// Clear SELECTED class from all except this one.
 			jQuery(this).closest('.options-container').find('.filter-class').removeClass('selected');
