@@ -236,3 +236,11 @@ function theme_enqueue_less() {
 wp_enqueue_style('myCss', get_bloginfo('template_directory').'/style.less', array(), '0.7', 'screen, projection');
 }
 add_action('wp','theme_enqueue_less');
+
+function add_fonts() {
+?>
+	<!-- webfonts -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+	<?php 
+}
+add_action('wp_head','add_fonts'); 
