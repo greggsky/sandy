@@ -160,7 +160,7 @@ function isotope_scriptage () {
 			} else {
 				isotopeFilter[filterAxis] = '.' + filterClass;
 			}
-			jQuery(isotopeContainer).isotope({ filter: filterSelector(isotopeFilter) }).isotope('reLayout');
+			jQuery(isotopeContainer).isotope({ filter: filterSelector(isotopeFilter) + ", .tile-always-display" }).isotope('reLayout');
 
 			// Clear SELECTED class from all except this one.
 			jQuery(this).closest('.options-container').find('.filter-class').removeClass('selected');
@@ -216,6 +216,11 @@ get_header(); ?>
 
 		<div class="container">
 		<?php the_occupy_sandy_cards(); ?>
+
+		<div class="card tile-always-display">
+		<h5 class="cardType">Start Your Own</h5>
+		<p>This is always displayed, even if the filter turns up no results.</p>
+		</div>
 		</div>
 
 			</div><!-- #content -->

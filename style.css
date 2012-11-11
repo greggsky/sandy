@@ -1684,6 +1684,9 @@ a.comment-reply-link {
 .unknown .cardType {
   background: #666666;
 }
+.tile-always-display .cardType {
+ background: #a99d00;
+}
 
 /** FILTER LISTS STYLING. **/
 
