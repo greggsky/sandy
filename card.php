@@ -14,8 +14,9 @@
 
 	// Pretty-print the date.
 	$today = time(); $yesterday = time() - (24*3600);
-	$datestamp = date('Y-m-d', $timestamp);
+
 	if (is_numeric($timestamp)) :
+		$datestamp = date('Y-m-d', $timestamp);
 		if (date('Y-m-d', $today) == $datestamp) :
 			$updated = 'today ';
 		elseif (date('Y-m-d', $yesterday) == $datestamp) :
