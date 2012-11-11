@@ -67,12 +67,12 @@
 			<nav id="global">
 				<ul id="menu-global-menu">
 					<li class="globalLogo"><a href="http://interoccupy.net">Inter<span>occupy.net</span></a></li>
-					<li class="navAbout"><a href="http://interoccupy.net">About</a></li>
+					<li class="navAbout"><a href="http://interoccupy.net/about/">About</a></li>
 					<li class="navNewsire"><a href="http://interoccupy.net/newswire/">Newswire</a></li>
 					<li class="navHubs"><a href="http://interoccupy.net/hubs/">Hubs</a></li>
-					<li class="navCalendar"><a href="http://interoccupy.net">Calendar</a></li>
-					<li class="navServices"><a href="http://interoccupy.net">Services</a></li>
-					<li class="navJoin"><a href="http://interoccupy.net">Get Involved</a></li>
+					<li class="navCalendar"><a href="http://interoccupy.net/calendar/">Calendar</a></li>
+					<li class="navServices"><a href="http://interoccupy.net/services/">Services</a></li>
+					<li class="navJoin"><a href="http://interoccupy.net/get-involved/">Get Involved</a></li>
 				</ul>
 			</nav>
 
