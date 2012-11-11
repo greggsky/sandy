@@ -40,7 +40,7 @@
 
 	?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
-<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/style.css" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
@@ -73,15 +73,15 @@
 				}?>
 				</a></span></h1>
 				<div id="carousel">
-					<a href="http://statigr.am/viewer.php#/detail/319004559331671253_25813182" target="_blank"><img src="images/carousel/occupysandy8.jpg" alt="occupysandy" width="150" height="150"></a>
-					<a href="http://statigr.am/viewer.php#/detail/319003987153974191_2484027" target="_blank"><img src="images/carousel/occupysandy10.jpg" alt="occupysandy" width="150" height="150"></a>
-					<a href="http://statigr.am/viewer.php#/detail/321731426281349892_4626303" target="_blank"><img src="images/carousel/occupysandy14.jpg" alt="occupysandy" width="150" height="150"></a>
-					<a href="http://statigr.am/viewer.php#/detail/321792944812413008_244169435" target="_blank"><img src="images/carousel/occupysandy5.jpg" alt="occupysandy" width="150" height="150"></a>
-					<a href="http://statigr.am/viewer.php#/detail/321708886318182164_30381338" target="_blank"><img src="images/carousel/occupysandy11.jpg" alt="occupysandy" width="150" height="150"></a>
-					<a href="http://statigr.am/viewer.php#/detail/319050062774329015_6968766" target="_blank"><img src="images/carousel/occupysandy7.jpg" alt="occupysandy" width="150" height="150"></a>
-					<a href="http://statigr.am/viewer.php#/detail/321802059520514427_28563429" target="_blank"><img src="images/carousel/occupysandy4.jpg" alt="occupysandy" width="150" height="150"></a>
-					<a href="http://statigr.am/viewer.php#/detail/319006263469863879_2484027" target="_blank"><img src="images/carousel/occupysandy9.jpg" alt="occupysandy" width="150" height="150"></a>
-					<a href="http://statigr.am/viewer.php#/detail/321866875885911625_7937366" target="_blank"><img src="images/carousel/occupysandy13.jpg" alt="occupysandy" width="150" height="150"></a>
+					<a href="http://statigr.am/viewer.php#/detail/319004559331671253_25813182" target="_blank"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/carousel/occupysandy8.jpg" alt="occupysandy" width="150" height="150"></a>
+					<a href="http://statigr.am/viewer.php#/detail/319003987153974191_2484027" target="_blank"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/carousel/occupysandy10.jpg" alt="occupysandy" width="150" height="150"></a>
+					<a href="http://statigr.am/viewer.php#/detail/321731426281349892_4626303" target="_blank"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/carousel/occupysandy14.jpg" alt="occupysandy" width="150" height="150"></a>
+					<a href="http://statigr.am/viewer.php#/detail/321792944812413008_244169435" target="_blank"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/carousel/occupysandy5.jpg" alt="occupysandy" width="150" height="150"></a>
+					<a href="http://statigr.am/viewer.php#/detail/321708886318182164_30381338" target="_blank"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/carousel/occupysandy11.jpg" alt="occupysandy" width="150" height="150"></a>
+					<a href="http://statigr.am/viewer.php#/detail/319050062774329015_6968766" target="_blank"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/carousel/occupysandy7.jpg" alt="occupysandy" width="150" height="150"></a>
+					<a href="http://statigr.am/viewer.php#/detail/321802059520514427_28563429" target="_blank"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/carousel/occupysandy4.jpg" alt="occupysandy" width="150" height="150"></a>
+					<a href="http://statigr.am/viewer.php#/detail/319006263469863879_2484027" target="_blank"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/carousel/occupysandy9.jpg" alt="occupysandy" width="150" height="150"></a>
+					<a href="http://statigr.am/viewer.php#/detail/321866875885911625_7937366" target="_blank"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/carousel/occupysandy13.jpg" alt="occupysandy" width="150" height="150"></a>
 				</div>
                 <?php if ( of_get_option('tagline',false) ) { ?>
 					<h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
