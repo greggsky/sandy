@@ -64,6 +64,18 @@
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed">
 	<header id="branding" role="banner" class="clearfix">
+			<nav id="global">
+				<ul id="menu-global-menu">
+					<li class="globalLogo"><a href="http://interoccupy.net">Inter<span>occupy.net</span></a></li>
+					<li class="navAbout"><a href="http://interoccupy.net">About</a></li>
+					<li class="navNewsire"><a href="http://interoccupy.net/newswire/">Newswire</a></li>
+					<li class="navHubs"><a href="http://interoccupy.net/hubs/">Hubs</a></li>
+					<li class="navCalendar"><a href="http://interoccupy.net">Calendar</a></li>
+					<li class="navServices"><a href="http://interoccupy.net">Services</a></li>
+					<li class="navJoin"><a href="http://interoccupy.net">Get Involved</a></li>
+				</ul>
+			</nav>
+
 			<hgroup>
 				<h1 id="site-title"><span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 				<?php if ( of_get_option('logo', false) ) { ?>
