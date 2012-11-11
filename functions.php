@@ -231,3 +231,8 @@ $os_regionToState = array(
 
 require_once('extensions/fusion/occupysandybackend.php');
 require_once('extensions/fusion/occupysandyfrontend.php');
+
+function theme_enqueue_less() {
+wp_enqueue_style('myCss', get_bloginfo('template_directory').'/style.less', array(), '0.7', 'screen, projection');
+}
+add_action('wp','theme_enqueue_less');
