@@ -64,7 +64,7 @@ function options_filter_ul ($filters, $axis) {
 	$lf = $filters['label-filter'];
 ?>
 <ul class="options-container options-for-<?php print $axis; ?>">
-<li><a href="#" id="filter-class-<?php print $axis; ?>-ALL" class="filter-class">All</a></li>
+<li><a href="#" id="filter-class-<?php print $axis; ?>-ALL" class="filter-class selected">All</a></li>
 <?php
 foreach ($filters['values'] as $vv => $N) :
 	$pair = array_map('urldecode', split("/", $vv, 2));
@@ -153,14 +153,20 @@ function isotope_scriptage () {
 			}
 
 			var filterClass = (jQuery(this).attr('id').replace(/^filter-class-/, ''));
-		
+
 			// Rewrite the value for this specific axis in the filtering
 			if (filterClass.match(new RegExp('^' + filterAxis + '-ALL$')) ) {
 				isotopeFilter[filterAxis] = null;
 			} else {
 				isotopeFilter[filterAxis] = '.' + filterClass;
 			}
-			jQuery(isotopeContainer).isotope({ filter: filterSelector(isotopeFilter) });
+			jQuery(isotopeContainer).isotope({ filter: filterSelector(isotopeFilter) }).isotope('reLayout');
+
+			// Clear SELECTED class from all except this one.
+			jQuery(this).closest('.options-container').find('.filter-class').removeClass('selected');
+			jQuery(this).addClass('selected');
+
+			// Avoid anchor behavior
 			e.preventDefault();
 			return false;
 		} );

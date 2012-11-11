@@ -1685,10 +1685,15 @@ a.comment-reply-link {
   background: #666666;
 }
 
+/** FILTER LISTS STYLING. **/
 
 .options-container {
 	float: left;
 }
+.options-container .filter-class.selected {
+	background-color: black; color: white;
+}
+
 .container {
 	clear: both;
 }
