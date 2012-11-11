@@ -1,6 +1,5 @@
 @import 'grid.less';
-	/* I know this syntax makes no sense but on my localhost on Chrome, the above import worked fine and the below import needed the path specified. Maybe .less files import .less files assuming the same directory but not .css files? MP */
-@import 'wp-content/themes/sandy/css/stateface.css';
+@import 'stateface.css';
 
 
 /******* GRID *******/
@@ -403,6 +402,10 @@ button, .button,
 #respond {
 	background: @grayF;
 	padding: 5px 15px;
+	margin-top: 30px;
+	.reply-title {
+		.caps;
+	}
 	textarea {
 		width: 100%;
 	}
@@ -411,6 +414,9 @@ button, .button,
 	}
 	input[type="button"], input[type="submit"], input[type="reset"] {
 		.btnSmall;
+		.caps;
+		font-weight: bold;
+		.border-radius();
 	}
 }
 
@@ -523,7 +529,7 @@ hr {
 
 .layout-1c {
 	#primary {
-		padding: 20px 0 0;
+		padding: 0;
 	}
 	.entry-header, .entry-content {
 		padding: 0 25px;
@@ -584,15 +590,18 @@ hr {
 	background: @black;
 	text-align: right;
 	height: 34px;
+	overflow: hidden;
 	li {
 		margin-left: 0;
 		.caps;
 		font-size: 12px;
+		.inlineBlock;
+		line-height: 34px;
 	}
 	a {
-		color: @grayD;
+		color: @grayC;
 		display: block;
-		padding: 6 10px;
+		padding: 0 10px;
 		&:hover {
 			color: @white;
 		}
@@ -903,6 +912,7 @@ footer.entry-meta {
 	float: left;
 	list-style: none;
 	margin-left: 25px;
+	margin-top: 5px;
 	li {
 		.inlineBlock;
 		margin-right: -4px;
@@ -910,7 +920,7 @@ footer.entry-meta {
 	}
 	a {
 		display: block;
-		padding: 3px 13px;
+		padding: 4px 11px;
 		.caps;
 		font-size: 12px;
 		background: @blue;
@@ -918,6 +928,7 @@ footer.entry-meta {
 	}
 	a:hover {
 		background: @grayB;
+		color: @white;
 	}
 	.filter-class.selected {
 		background-color: @grayA; 
@@ -926,17 +937,19 @@ footer.entry-meta {
 }
 
 
-.isotope {
-	background: @grayF;
-	padding: 25px;
+.container {
 	.clearfix;
 	clear: both;
+	background: @grayF;
+	padding: 25px;
+	margin-top: 20px;
+	width: 100%;
 }
 
 .card {
 	float: left;
 	width: 300px;
-	margin: 15px 15px 15px 20px;
+	margin: 15px 0 15px 15px;
 	padding: 0 15px 10px;
 	background: @white;
 	box-shadow: 3px 3px 25px -10px black; /*MP*/
@@ -1141,7 +1154,7 @@ footer.entry-meta {
 .ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
 
 /* Tabs widget */
-.ui-tabs { position: relative; padding: 0; zoom: 1; padding: 0; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+.ui-tabs { position: relative; padding: 0; zoom: 1; padding: 0!important; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
 .ui-tabs .ui-tabs-nav { margin: 0; padding: 0!important; background: #999; height: 36px; border: 0!important;}
 .ui-tabs .ui-tabs-nav li { list-style: none; float: left; position: relative; top: 0; margin: 0; border-bottom: 0 !important; padding: 0; white-space: nowrap; line-height: 36px; font-size: 24px; .condensed;  border-right: 1px;}
 .ui-tabs .ui-tabs-nav li a { float: left; padding: 0 25px!important; line-height: 36px; text-decoration: none; color: #FFF; }
@@ -1163,6 +1176,12 @@ footer.entry-meta {
 	.border-radius(0)!important;
 }
 
+.sws-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected a,
+.sws-tabs.ui-tabs .ui-tabs-nav li a:hover {
+	color: white;
+	border-radius: 0;
+	background: #FFCD67!important;
+}
 
 .ui-tabs .ui-tabs-nav li {
 	top: 0!important;
