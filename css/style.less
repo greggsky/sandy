@@ -1,0 +1,876 @@
+@import 'grid.less';
+@import 'stateface.css';
+
+/******* GRID *******/
+/* from semantic.gs */
+
+/* specify the number of columns and set column and gutter widths */
+@columns: 12;
+@column-width: 60;
+@gutter-width: 20;
+
+/* remove the definition below for a pixel-based layout */
+@total-width: 100%;
+
+
+
+/******* RESET *******/
+
+
+/* Eric Meyer's Reset Reloaded *//* http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/ */html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;vertical-align: baseline;background: transparent;}body {line-height: 1;}ol, ul {list-style: none;}blockquote, q {quotes: none;}/* remember to define focus styles! */:focus {outline: 0;}/* remember to highlight inserts somehow! */ins {text-decoration: none;}del {text-decoration: line-through;}/* tables still need 'cellspacing="0"' in the markup */table {border-collapse: collapse;border-spacing: 0;}
+
+/* apply a natural box layout model to all elements */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+
+/******* WEBFONTS *******/
+
+
+@font-face {
+    font-family: 'LeagueGothicRegular';
+    src: url('../fonts/League_Gothic-webfont.eot');
+    src: url('../fonts/League_Gothic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/League_Gothic-webfont.woff') format('woff'),
+         url('../fonts/League_Gothic-webfont.ttf') format('truetype'),
+         url('../fonts/League_Gothic-webfont.svg#LeagueGothicRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'entypo';
+    src: url('../fonts/entypo.eot');
+    src: url('../fonts/entypo.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/entypo.woff') format('woff'),
+         url('../fonts/entypo.ttf') format('truetype'),
+         url('../fonts/entypo.svg#entypo') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'entypo-social';
+    src: url('../fonts/entypo-social.eot');
+    src: url('../fonts/entypo-social.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/entypo-social.woff') format('woff'),
+         url('../fonts/entypo-social.ttf') format('truetype'),
+         url('../fonts/entypo-social.svg#entypo-social') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/******* MIXINS *******/
+
+/* colors */
+
+@yellow: #FFCD67;
+@red: #DA521F;
+@blue: #0085BF;
+@green: #22B573;
+@teal: #00A99D;
+@navy: #36637D;
+@black: #000000;
+@grayA: #222222;
+@grayB: #555555;
+@grayC: #AAAAAA;
+@grayD: #BBBBBB;
+@grayE: #DDDDDD;
+@grayF: #EEEEEE;
+@white: #FFFFFF;
+
+
+/* structure */
+
+.left {float: left; }
+.right {float: right; }
+.nodisplay {display: none!important;}
+.leader {margin-bottom: .2em;}
+.follower {margin-top: .2em;}
+.stalker {margin-top: 0;}
+
+.absolute (@z) {
+	position: absolute; 
+	left: 0; 
+	top: 0;
+	z-index: @z;
+}
+
+/* cross-browser inline-block from http://bit.ly/KuaPpr */
+.inlineBlock {
+	display: -moz-inline-stack; 
+	display: inline-block;
+	zoom: 1;
+	*display: inline;		
+}
+
+/* the magnificent clearfix -- j.mp/bestclearfix */
+.fixer {content: "\0020"; display: block; height: 0; overflow: hidden;}
+.clearfix {
+	zoom: 1; 
+	&:before {.fixer;}
+	&:after {.fixer; clear: both;}
+}
+
+
+/* css3 */
+/* add behavior:url(../js/PIE.htc); to each css3 property for IE support: css3pie.com */
+
+
+.border-radius (@radius: 5px) {
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+  border-radius: @radius;
+  behavior:url(../js/PIE.htc); 
+}
+
+.box-shadow (@x: 0, @y: 1px, @blur: 3px, @spread: 0, @color: #BBBBBB) {
+  -moz-box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+  box-shadow: @arguments;
+  behavior:url(../js/PIE.htc); 
+}
+
+.clear-shadow {
+	.box-shadow(0, 0, 0, 0, #000);			
+}
+
+.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+  behavior:url(../js/PIE.htc); 
+}
+
+.linear-gradient (@begin: #FFF, @end: #DDDDDD, @switch : 100%) {
+	background:  @begin;
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(@begin), color-stop(@switch, @end));
+	background: -moz-linear-gradient(top, @begin, @end @switch);
+	background: -o-linear-gradient(top, @begin, @end @switch);
+	background: linear-gradient(top, @begin, @end @switch);
+  behavior:url(../js/PIE.htc); 
+}
+
+.text-shadow (@string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
+	text-shadow: @string;
+  behavior:url(../js/PIE.htc); 
+}
+
+.text-glow (@string: 0 1px 0 #FFF) {
+	text-shadow: @string;
+	behavior:url(../js/PIE.htc); 
+}
+
+.transition (@transition) {
+	-webkit-transition: @transition;
+	-moz-transition:    @transition;
+	-ms-transition:     @transition;
+	-o-transition:      @transition;
+	behavior:url(../js/PIE.htc); 
+}
+
+/* ellipsis: only works on single lines */
+.ellipsis { 
+	text-overflow: ellipsis; 
+	-o-text-overflow: ellipsis; 
+	-webkit-text-overflow: ellipsis; 
+	white-space: nowrap; 
+	overflow: hidden; 
+}
+
+/* image replacement */
+.ir {
+	display: block; 
+	text-indent: -999em; 
+	overflow: hidden; 
+	background-repeat: no-repeat; 
+	text-align: left; 
+	direction: ltr; 
+} 
+
+
+/* site mixins */
+
+
+
+
+/******* GLOBAL TYPOGRAPHY *******/
+
+/* don't use .condensed smaller than 22px */
+.condensed {font-family: "LeagueGothicRegular", "Arial Narrow", "Lucida Grande", "Lucida Sans", Arial, sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 1px;}
+
+.sans {font-family: "Open Sans", "Lucida Grande", "Lucida Sans", sans-serif; font-weight: normal; font-style: normal;}
+
+.pictogram {font-family: "entypo";}
+.socialgram {font-family: "entypo-social";}
+
+
+body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, caption, pre, table, address, blockquote {
+	.sans;
+	font-size: 14px;
+	line-height: 1.5em; 
+	margin:0; 
+	padding:0; 
+	text-align: left; 
+	color: @grayA;
+}
+	
+h1, h2, h3, h4, h5, h6, dl, ol, ul, pre, table, address, blockquote {
+	margin: 1em 0 .5em;
+}
+
+p {
+	margin: .5em 0 .5em;
+}
+
+h1 {font-size: 32px; .condensed;}
+h2 {font-size: 26px; text-transform: uppercase;}
+h3 {font-size: 18px;}
+h4 {font-size: 14px;}
+h5 {font-size: 13px;}
+h6 {font-size: 12px;}
+p, label, li  {font-size: 16px;}
+
+.small {font-size: 12px;}
+.caps {text-transform: uppercase; letter-spacing: 1px; line-height: 1.2em;}
+.alertText, .alertText a {color: @red;}
+
+blockquote {
+	font-size: 18px; 
+	font-style: normal; 
+	color: @black; 
+	background: @white;
+	margin-top: 1.5em;
+	padding: 25px 50px;
+	border-top: 1px solid #BBB;
+    position: relative;
+	&:before, &:after {
+    	font-family: "entypo";
+		content: "★";
+		font-size: 60px;
+		color: @yellow;
+	}
+	&:before {
+	    position: absolute;
+	    left: 5px;
+	    top: 25px;
+	    text-indent: 0;
+	} 
+	&:after {
+	    position: absolute;
+	    right: 5px;
+	    top: 25px;
+	    text-indent: 0;
+	} 
+}
+
+cite {
+	text-align: center;	
+}
+
+
+.currentNeeds {
+	padding: 15px;
+	background: @grayF;
+}
+
+
+/* links */
+
+a, a:active, a:visited {
+	color: @blue; 
+	text-decoration: none; 
+	cursor: pointer;
+	&:hover, &:focus {
+		color: @grayA; 
+	}
+}
+
+a img {border: 0;}
+
+button, .button, 
+.button:active, .button:visited {
+	.inlineBlock;
+	.clear-shadow();
+	.border-radius(4px);
+	.sans;
+	.caps;
+	padding: 10px 10px;
+	text-align: center;
+	font-weight: bold;
+	background: @grayA;
+	color: @grayF;
+	text-decoration: none; 
+	cursor: pointer;	
+	&:hover {
+		background: @grayC;
+		color: @white; 
+	}
+}
+
+.btnAlert, 
+.btnAlert:active, .btnAlert:visited {
+	background: @red;
+	&:hover {
+	}
+}
+
+.btnSmall {
+	border: 1px solid @blue;
+	color: @blue;
+}
+
+/******* FORMS *******/
+/* from skeleton.js */
+
+
+	form {
+		margin-bottom: 20px; }
+	fieldset {
+		margin-bottom: 20px; }
+	input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	textarea,
+	select {
+		border: 1px solid #ccc;
+		padding: 6px 4px;
+		outline: none;
+		-moz-border-radius: 2px;
+		-webkit-border-radius: 2px;
+		border-radius: 2px;
+		font: 13px "Open Sans", Verdana, sans-serif;
+		color: #777;
+		margin: 0;
+		width: 210px;
+		max-width: 100%;
+		display: block;
+		margin-bottom: 20px;
+		background: #fff; }
+	select {
+		padding: 0; }
+	input[type="text"]:focus,
+	input[type="password"]:focus,
+	input[type="email"]:focus,
+	textarea:focus {
+		border: 1px solid #aaa;
+ 		color: #444;
+ 		-moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
+		-webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
+		box-shadow:  0 0 3px rgba(0,0,0,.2); }
+	textarea {
+		min-height: 60px; }
+	label,
+	legend {
+		display: block;
+		font-weight: bold;
+		font-size: 13px;  }
+	select {
+		width: 220px; }
+	input[type="checkbox"] {
+		display: inline; }
+	label span,
+	legend span {
+		font-weight: normal;
+		font-size: 13px;
+		color: #444; }
+
+
+
+/******* LISTS *******/
+
+/* horizontal lists */
+.menu {
+	.clearfix;
+	width: 100%;
+	li {
+		.inlineBlock;
+	}	
+}
+
+.sub-menu {
+	display: none;
+}
+
+.tabs {
+	.clearfix;
+	padding: 25px 0 0;
+	margin: 0;
+	list-style: none;
+	li {
+		.inlineBlock;
+		cursor: pointer;
+		font-size: 14px;
+		padding: 6px 15px;
+		margin-right: 6px;
+		background: @grayF;		
+		&.on, &:hover {
+			color: #FFF;
+			background: @grayA;
+		}
+	}
+}
+
+.tabPage {
+	border-top: 1px solid @grayB;
+	border-bottom: 1px solid @grayB;
+	padding: 20px 0;
+	margin: 0 0 20px;
+	display: none;
+	&:first-child {
+		display: block;
+	}	
+}
+
+
+
+/******* GLOBAL STRUCTURE *******/
+
+
+#page {
+	width: 100%;
+	overflow: hidden;
+	
+}
+/* header */
+
+#branding {
+	margin: 0;
+	background: @black;
+	padding-top: 34px;
+	hgroup {
+		height: 164px;
+		padding: 7px;
+		background: #333;
+	}
+}
+
+#site-title {
+	margin: 0;
+	font-size: 54px;
+	line-height: 46px;
+	position: relative;
+	span {
+		position: absolute;
+		text-align: center;
+		.text-shadow(0 0 10px rgba(0, 0, 0, 0.4));
+		height: 150px;
+		width: 150px;
+		padding: 7px;
+	}
+	a {
+		color: @white;
+	}
+}
+
+#carousel {
+	height: 150px;
+	width: 120%;
+	overflow: hidden;
+	a {
+		margin-right: 5px;
+	}
+}
+
+#menu-global-menu {
+	padding: 6px 15px;
+	margin: 0;
+	background: @black;
+	text-align: right;
+	li {
+		margin-left: 20px;
+		.caps;
+		font-size: 12px;
+	}
+	a {
+		color: @grayD;
+		display: block;
+		padding: 0 5px;
+		&:hover {
+			color: @white;
+		}
+	}
+	.globalLogo {
+		float: left;
+		
+	}
+}
+
+#access {
+	background: @grayD;
+}
+
+#menu-local-menu {
+	clear: both;
+	margin: 0;
+	background: #999;
+	li {
+		border-right: 1px solid #BBB;
+		margin: 0 -4px 0 0;
+		.condensed;
+		font-size: 26px;
+		line-height: 44px;
+		
+	}
+	a {
+		color: @white;
+		display: block;
+		padding: 0 20px;
+	}
+	a:hover, .current-menu-item a {
+		background: @yellow;
+	}
+}
+
+
+/* content */
+
+#primary {
+	width: 100%;
+	background: @white;
+	padding: 20px 30px 40px;
+}
+
+.layout-2cl #primary {
+	width: 75%;
+	float: right;
+}
+
+#secondary {
+	width: 25%;
+	background: @white;
+	padding: 0 15px;
+	margin-top: 35px;
+	background: @white;
+	border-right: 1px solid @grayE;
+	.button {
+		margin-bottom: 10px;
+		width: 100%;
+	}
+	.stateface-nj {
+		font-size: 40px;
+		line-height: 33px;
+		text-transform: lowercase;
+		float: left;
+		zoom: 1;
+		width: 20px;
+		margin-right: -30px;
+	}
+}
+
+
+.page-title {
+	font-size: 48px;
+	margin: 0;
+	color: @yellow;
+}
+.page-subtitle {
+	margin-top: 0;
+	font-size: 18px;
+}
+
+.content-wrap {
+	padding-bottom: 25px;
+}
+
+.entry-title {
+	margin-top: .5em;
+}
+
+
+.entry-date {
+	font-style: italic;
+	color: @grayC;
+}
+
+
+.entry-summary {
+	margin-bottom: 2em;
+}
+
+.sws-tabs {
+	border-top: 1px solid @grayC;
+	border-bottom: 1px solid @grayC;	
+}
+
+footer.entry-meta {
+	color: @grayC;
+	.small;
+}
+
+
+.emailForm {
+	margin: 20px 0 20px;
+	border-top: 1px dotted @grayB;
+	border-bottom: 1px dotted @grayB;
+	padding: 20px 0 0;
+	text-align: left;
+}
+
+.main {
+	.column(9);
+	padding: 30px 30px 30px 20px;
+	background: @white;
+}
+
+.social a {
+	font-size: 40px;
+	padding: 10px;
+}
+
+
+
+
+/* footer */
+
+#colophon {
+	clear: both;
+	border-top: 1px solid @grayD;
+}
+
+#site-generator {
+	background: @black;
+	color: @grayD;
+	padding: 5px 25px 10px;
+	.small;
+	a {
+		color: @grayD;
+		font-weight: 400;
+		&:hover {
+			color: @white;
+		}
+	}
+}
+
+.about {
+	.column(6);
+	padding: 20px;
+}
+.events {
+	.column(3);
+	padding: 20px;
+}
+.contact {
+	.column(3);
+	padding: 20px;
+}
+
+
+
+
+/******* UNIQUE PAGES *******/
+
+
+/* home */
+
+
+
+/* map */
+
+.otherMaps {
+	.column(2);
+	float: right;
+}
+
+.legend {
+	padding: 25px;
+}
+
+.key {
+	margin-right: 20px;
+	font-weight: bold;
+	.caps;
+}
+.keyHub {
+	.key;
+	color: @red;
+}
+.keyDropoff {
+	.key;
+	color: @green;
+}
+.keyVolunteer {
+	.key;
+	color: @blue;
+}
+.keyBoth {
+	.key;
+	color: @teal;
+}
+.keyUnknown {
+	.key;
+	color: @grayC;
+}
+.keyFood {
+	.key;
+	color: @yellow;
+}
+
+
+/* cards */
+
+.volunteerPage .main, .mapsPage .main {
+	.column(12);	
+	padding: 0;
+}
+
+.basics {
+	background: @white;
+	padding: 25px;
+}
+
+
+.container {
+	background: @grayF;
+	padding: 20px;
+	.clearfix;
+}
+
+.card {
+	float: left;
+	width: 300px;
+	margin: 0 15px 15px 0;
+	padding: 0 15px 10px;
+	background: @white;
+	h1, h2, h5, p {
+		margin-bottom: 10px;
+	}
+	span {
+		.sans;
+		.caps;
+		font-size: 12px;
+		color: @grayA;
+	}
+	.stateface {
+		float: right;
+		color: @white;
+		font-size: 22px;
+		text-transform: none;
+		margin-top: 2px;
+		margin-right: -5px;
+	}
+}
+
+.cardType {
+	.caps;
+	font-weight: 700;
+	color: @white;
+	padding: 0 15px;
+	margin-left: -15px;
+	margin-right: -15px;
+	height: 32px;
+	line-height: 32px;
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.cardName {
+	.condensed;
+	line-height: 1.1em;
+	padding-top: 4px;
+}
+.cardAddress {
+	.caps;
+	margin-top: -6px;
+}
+.cardUpdated {
+	font-style: italic;
+	margin-top: -6px;
+}
+.cardStatus {
+	color: @red;
+}
+.cardTimes, .cardContact, .cardLink {
+	font-weight: bold;
+	span {
+		font-size: 11px;		
+	}
+}
+.cardLink a {
+	color: @black;
+	text-decoration: underline;
+	&:hover {
+		color: @blue;
+	}
+}
+
+.cardButtons {
+	.clearfix;
+	margin: 12px 0 6px;
+	li {
+		float: left;
+		margin-right: 10px;
+	}
+	a {
+		color: @black;
+		font-size: 45px;
+		line-height: 27px;
+		display: block;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		.border-radius(15px);
+		border: 1px solid #CCC;
+		&:hover {
+			color: @blue;
+		}
+	}
+}
+
+
+/* card types */
+
+.hub .cardType {
+	background: @red;
+}
+.volunteer .cardType {
+	background: @blue;
+}
+.dropoff .cardType {
+	background: @green;
+}
+.both .cardType {
+	background: @teal;
+}
+.unknown .cardType {
+	background: @grayB;
+}
+
+
+
+
+/******* BROWSER FIXES *******/
+
+/* FF buttons: remove padding to vertically center text */
+input::-moz-focus-inner { 
+    border: 0;
+    padding: 0;
+}
+
+
+
+/******* RESPONSIVE STYLING *******/
+
+
+@media screen and (max-width: 720px) {
+
+	.layout-2cl #primary,
+	#secondary {
+		width: 100%;
+		margin-bottom: 1em;
+		float: none;
+	}
+	
+	#menu-local-menu  {
+		
+	}
+
+}
+
+
+
+/******* HIDE SOME ELEMENTS IN THE WORDPRESS THEME *******/
+
+.skip-link, .section-heading {
+	display: none;
+}
