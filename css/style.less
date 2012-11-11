@@ -1,3 +1,12 @@
+/*
+Theme Name: Sandy
+Author: Occupy
+Author URI: http://occupy.net
+Description: Based on Foghorn, a minimalist theme built off the foundation of Twenty Eleven.
+
+*/
+
+
 @import 'grid.less';
 @import 'stateface.css';
 
@@ -17,10 +26,11 @@
 /******* RESET *******/
 
 
-/* Eric Meyer's Reset Reloaded *//* http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/ */html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;vertical-align: baseline;background: transparent;}body {line-height: 1;}ol, ul {list-style: none;}blockquote, q {quotes: none;}/* remember to define focus styles! */:focus {outline: 0;}/* remember to highlight inserts somehow! */ins {text-decoration: none;}del {text-decoration: line-through;}/* tables still need 'cellspacing="0"' in the markup */table {border-collapse: collapse;border-spacing: 0;}
+/* Eric Meyer's Reset Reloaded *//* http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/ */html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;vertical-align: baseline;background: transparent;}:focus {/* remember to define focus styles! */outline: 0;}body {line-height: 1;}ol, ul {list-style: none;}table {/* tables still need 'cellspacing="0"' in the markup */border-collapse: separate; border-spacing: 0;} caption, th, td {font-weight: normal; text-align: left;} blockquote:before, blockquote:after, q:before, q:after {content: "";} blockquote, q {quotes: "" "";}a img {border: 0;}article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
 
 /* apply a natural box layout model to all elements */
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
 
 
 /******* WEBFONTS *******/
@@ -205,6 +215,13 @@
 .pictogram {font-family: "entypo";}
 .socialgram {font-family: "entypo-social";}
 
+body, input, textarea {
+	.sans;
+	color: @grayA;
+	font-size: 14px;
+	line-height: 1.5em;
+	font-weight: 400; 
+}
 
 body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, caption, pre, table, address, blockquote {
 	.sans;
@@ -266,7 +283,43 @@ blockquote {
 }
 
 cite {
-	text-align: center;	
+	font-size: 12px;
+	text-align: right;
+}
+
+abbr, acronym, dfn {
+	border-bottom: 1px dotted #666;
+	cursor: help;
+}
+address {
+	display: block;
+	margin: 0 0 1.5em;
+}
+ins {
+	background: @grayF;
+	text-decoration: none;
+}
+sup,
+sub {
+	font-size: 10px;
+	height: 0;
+	line-height: 1;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	bottom: 1ex;
+}
+sub {
+	top: .5ex;
+}
+
+pre {
+	background: @grayF;
+	font: 13px "Courier 10 Pitch", Courier, monospace;
+	line-height: 1.5em;
+	margin-bottom: 1.5em;
+	padding: 0.75em 1.5em;
 }
 
 
@@ -380,7 +433,38 @@ button, .button,
 
 /******* LISTS *******/
 
-/* horizontal lists */
+
+ul {
+	list-style: square;
+}
+ol {
+	list-style-type: decimal;
+}
+ol ol {
+	list-style: upper-alpha;
+}
+ol ol ol {
+	list-style: lower-roman;
+}
+ol ol ol ol {
+	list-style: lower-alpha;
+}
+ul ul, ol ol, ul ol, ol ul {
+	margin-bottom: 0;
+}
+dl {
+	margin: 0;
+}
+dt {
+	font-weight: 400;
+}
+dd {
+}
+
+
+
+/* menus */
+
 .menu {
 	.clearfix;
 	width: 100%;
@@ -391,6 +475,28 @@ button, .button,
 
 .sub-menu {
 	display: none;
+	float: left;
+	margin: 0;
+	position: absolute;
+	top: 28px;
+	left: 0;
+	width: 188px;
+	z-index: 99999;
+	background: @grayF;
+	li {
+		margin: 0;
+	}
+	a {
+		.sans;
+		border-bottom: 1px solid @grayE;
+		font-size: 14px;
+		line-height: 1em;
+		padding: 10px;
+		width: 150px;
+	}
+	li:hover a {
+		background: @grayC;
+	}
 }
 
 .tabs {
@@ -423,9 +529,18 @@ button, .button,
 	}	
 }
 
+hr {
+	background-color: #ccc;
+	border: 0;
+	height: 1px;
+	margin-bottom: 1.4em;
+}
+
+
 
 
 /******* GLOBAL STRUCTURE *******/
+
 
 
 #page {
@@ -433,6 +548,50 @@ button, .button,
 	overflow: hidden;
 	
 }
+
+#main {
+	clear: both;
+}
+
+
+#primary {
+	width: 100%;
+	background: @white;
+	padding: 20px 30px 40px;
+}
+
+.layout-2cl #primary {
+	width: 75%;
+	float: right;
+}
+
+#secondary {
+	width: 25%;
+	background: @white;
+	padding: 0 15px;
+	margin-top: 35px;
+	background: @white;
+	border-right: 1px solid @grayE;
+	.button {
+		margin-bottom: 10px;
+		width: 100%;
+	}
+	.stateface-nj {
+		font-size: 40px;
+		line-height: 33px;
+		text-transform: lowercase;
+		float: left;
+		zoom: 1;
+		width: 20px;
+		margin-right: -30px;
+	}
+}
+
+#content {
+	width: 100%;
+}
+
+
 /* header */
 
 #branding {
@@ -497,6 +656,8 @@ button, .button,
 	}
 }
 
+/* local nav */
+
 #access {
 	background: @grayD;
 }
@@ -525,40 +686,6 @@ button, .button,
 
 
 /* content */
-
-#primary {
-	width: 100%;
-	background: @white;
-	padding: 20px 30px 40px;
-}
-
-.layout-2cl #primary {
-	width: 75%;
-	float: right;
-}
-
-#secondary {
-	width: 25%;
-	background: @white;
-	padding: 0 15px;
-	margin-top: 35px;
-	background: @white;
-	border-right: 1px solid @grayE;
-	.button {
-		margin-bottom: 10px;
-		width: 100%;
-	}
-	.stateface-nj {
-		font-size: 40px;
-		line-height: 33px;
-		text-transform: lowercase;
-		float: left;
-		zoom: 1;
-		width: 20px;
-		margin-right: -30px;
-	}
-}
-
 
 .page-title {
 	font-size: 48px;
@@ -657,9 +784,33 @@ footer.entry-meta {
 }
 
 
+/* widgets */
+
+.widget {
+	
+}
+
 
 
 /******* UNIQUE PAGES *******/
+
+
+/* 404 */
+
+.error404 #main #searchform {
+	border-bottom: 1px solid #ddd;
+	margin: 0 0 1.4em;
+	padding:0 0 1.4em;
+}
+.error404 .hentry #s {
+	width: 60%;
+}
+
+.error404 .hentry .widget {
+	background:transparent;
+	border:none;
+	padding:0;
+}
 
 
 /* home */
@@ -706,6 +857,9 @@ footer.entry-meta {
 	.key;
 	color: @yellow;
 }
+
+
+/******* ISOTOPE *******/
 
 
 /* cards */
@@ -835,6 +989,72 @@ footer.entry-meta {
 .unknown .cardType {
 	background: @grayB;
 }
+.tile-always-display .cardType {
+ background: @yellow;
+}
+
+
+/* filters */
+
+.options-container {
+	float: left;
+}
+.options-container .filter-class.selected {
+	background-color: black; color: white;
+}
+
+.container {
+	clear: both;
+}
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Isotope CSS3 transitions */
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/* disabling Isotope CSS3 transitions */
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
 
 
 
@@ -867,6 +1087,27 @@ input::-moz-focus-inner {
 
 }
 
+
+
+/******* PRINT *******/
+
+@media print {
+	body {
+		background: none !important;
+		font-size: 10pt;
+	}
+	footer.entry-meta a[rel=bookmark]:link:after,
+	footer.entry-meta a[rel=bookmark]:visited:after {
+		content:" [" attr(href) "] "; /* Show URLs */
+	}	
+	#page {
+		clear: both !important;
+		display: block !important;
+		float: none !important;
+		max-width: 100%;
+		position: relative !important;
+	}
+}
 
 
 /******* HIDE SOME ELEMENTS IN THE WORDPRESS THEME *******/
