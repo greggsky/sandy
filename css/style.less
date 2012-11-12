@@ -457,6 +457,12 @@ dt {
 dd {
 }
 
+#content ol {
+	margin: 2em 50px;
+	li {
+		margin-bottom: .5em;
+	}
+}
 
 
 /* menus */
@@ -716,14 +722,34 @@ footer.entry-meta {
 }
 
 
+.start-widget {
+	margin-top: 25px;
+	border-top: 1px dotted #666;
+	padding: 0 5px;
+}
+
+.startList {
+	list-style: none; 
+	li {
+		font-size: 14px;
+		margin-bottom: .5em;
+	}
+	span {
+		font-size: 13px;
+		.caps;
+		margin-right: 3px;
+	}
+}
+
+
 .email-form {
 	border-top: 1px dotted @grayB;
-	border-bottom: 1px dotted @grayB;
-	padding: 15px 10px 30px;
-	margin: 25px 0;
+	padding: 5px;
+	margin-top: 25px;
 	text-align: left;
 	label {
 		font-weight: 400;
+		padding: 0 3px;
 	}
 	.edit-value {
 		background: @grayF;
@@ -732,7 +758,7 @@ footer.entry-meta {
 		margin: 3px 0 5px;
 	}
 	input[type="text"] {
-		margin: 0;
+		margin: 0 3px;
 		width: 100%;
 	}
 }
