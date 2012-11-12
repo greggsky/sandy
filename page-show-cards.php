@@ -48,7 +48,7 @@ function betterCardTitles ($title, $card) {
 // Here is a way to add or subtract classes on the fly.
 function betterCardClasses ($classes, $card) {
 	if ($card->has_type('Food\s*Not\s*Bombs')) :
-		$classes[] = 'FNB';
+		$classes[] = 'FoodNotBombs';
 	endif;
 	return $classes;
 }
@@ -98,12 +98,12 @@ print $label;
 // FILTERING: PREPARE OPTIONS FOR FILTERING LISTS. //
 /////////////////////////////////////////////////////
 
-$filters['state'] = array(
+/* $filters['state'] = array(
 	"values" => get_occupy_sandy_possible_values_for('get_state'),
 	"prefix" => 'state-',
 	"label-filter" => 'strtoupper',
 	'default' => 'Unlisted',
-);
+); */
 $filters['type'] = array(
 	'values' => get_occupy_sandy_possible_values_for('get_type_classes'),
 	'prefix' => '',
@@ -120,11 +120,11 @@ $filters['region'] = array(
 $filterMap['type']['text'] = array('unknown' => 'Other');
 
 // Force the unknown / other settings to bottom.
-$filters['state']['values'][''] = 0;
+//$filters['state']['values'][''] = 0;
 $filters['type']['values']['unknown'] = 0;
 $filters['region']['values']['Other/region-other'] = 0;
 
-arsort($filters['state']['values']);
+//arsort($filters['state']['values']);
 arsort($filters['type']['values']);
 arsort($filters['region']['values']);
 
