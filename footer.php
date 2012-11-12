@@ -15,18 +15,22 @@
 	<footer id="interoccupy">
 			<div class="about">
 				<p>Occupy Sandy is a coordinated relief effort to help distribute resources & volunteers to help neighborhoods and people affected by Hurricane Sandy. We are a coalition of people & organizations who are dedicated to implementing aid and establishing hubs for neighborhood resource distribution. Members of this coalition are from Occupy Wall Street, 350.org, recovers.org and interoccupy.net.</p>
+				<p>Follow us: <a class="socialgram" href="http://twitter.com/occupysandy" target="_blank">&#62217;</a> <a class="socialgram" href="http://facebook.com/occupysandy" target="_blank">&#62220;</a></p>
+	
 			</div>
 			<div class="events">
-				<h3>Next meeting:</h3>
+				<h3 class="events-title">Next meeting:</h3>
 				<p>None scheduled. Check back for the next call.</p>
 			</div>
 			<div class="contact">
-				<h3>Contact us:</h3>
+				<h3 class="contact-title">Contact us:</h3>
 				<dl>
 					<dt>General Inquiries:</dt>
 					<dd><a href="mailto:OccupySandy@interoccupy.net"> OccupySandy@interoccupy.net</a></dd>
 					<dt>Press:</dt>
 					<dd><a href="mailto:SandyPress@interoccupy.net"> SandyPress@interoccupy.net</a></dd>
+					<dt>Medics:</dt>
+					<dd><a href="mailto:SandyMedics@interoccupy.net"> SandyMedics@interoccupy.net</a></dd>
 				</dl>
 			</div>		
 	</footer>
