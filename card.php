@@ -32,7 +32,7 @@
 ?>
 <div class="<?php print implode(" ", $classes); ?>">
 <h5 class="cardType"><?php print $card->get_card_heading(); ?><?php if (strlen($state) > 0) :
-?> <span class="stateface stateface-replace stateface-<?php print strtolower($state); ?>"><?php print strtolower($state); ?></span><?php
+?> <span class="stateface stateface-<?php print strtolower($state); ?>"><?php print strtolower($state); ?></span><?php
 endif; ?></h5>
 <h2 class="cardName"><?php print $card->get_title(); ?></h2>
 

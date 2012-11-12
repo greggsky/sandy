@@ -1,5 +1,4 @@
 @import 'grid.less';
-@import 'stateface.css';
 
 
 /******* GRID *******/
@@ -72,6 +71,19 @@ body #page {
     font-weight: normal;
     font-style: normal;
 }
+
+
+@font-face {
+     font-family: 'StateFaceRegular';
+     src: url('../fonts/stateface-regular-webfont.eot');
+     src: url('../fonts/stateface-regular-webfont.eot?#iefix') format('embedded-opentype'),
+          url('../fonts/stateface-regular-webfont.woff') format('woff'),
+          url('../fonts/stateface-regular-webfont.ttf') format('truetype'),
+          url('../fonts/stateface-regular-webfont.svg#StateFaceRegular') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+
 
 
 
@@ -220,6 +232,32 @@ body #page {
 
 .pictogram {font-family: "entypo";}
 .socialgram {font-family: "entypo-social";}
+
+
+.stateface {
+    text-indent: -999em;
+    display: inline-block;
+    position: relative;
+    min-width: 1em;
+	&:before {
+	    font-family: "StateFaceRegular";
+	    margin-right: 5px;
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    text-indent: 0;
+	}
+}
+
+.stateface-nj:before {
+    content: "e";
+}
+
+.stateface-ny:before {
+    content: "h";
+}
+
+
 
 body, input, textarea {
 	.sans;
@@ -610,7 +648,7 @@ hr {
 		display: block;
 		padding: 0 10px;
 		&:hover {
-			color: @white;
+			color: @grayE;
 		}
 	}
 	.globalLogo {
