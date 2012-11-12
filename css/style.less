@@ -417,6 +417,7 @@ button, .button,
 		.caps;
 		font-weight: bold;
 		.border-radius();
+		border: 0;
 	}
 }
 
@@ -685,6 +686,15 @@ hr {
 	}
 }
 
+#menu-item-602, #menu-item-603 {
+	a {
+		.socialgram;
+		font-size: 40px;
+		padding: 0;
+		width: 44px;
+		text-align: center;
+	}
+}
 
 /* content */
 
@@ -828,6 +838,10 @@ footer.entry-meta {
 }
 
 
+.events-title, .contact-title {
+	margin-top: 0;
+}
+
 .about {
 	.column(6);
 	padding: 20px;
@@ -835,10 +849,12 @@ footer.entry-meta {
 .events {
 	.column(3);
 	padding: 20px;
+	dt {margin-top: .5em}
 }
 .contact {
 	.column(3);
 	padding: 20px;
+	dt {margin-top: .5em}
 }
 
 
