@@ -45,23 +45,23 @@ endif; ?></h5>
 <?php endif; ?>
 
 <?php if (strlen($status) > 0) : ?>
-<p class="cardStatus">Status: <?php print $status; ?></p>
+<p class="cardStatus"><span>Status:</span> <?php print $status; ?></p>
 <?php endif; ?>
 
 <?php if (strlen($description) > 0) : ?>
-<p class="cardStatus">Details: <?php print $description; ?></p>
+<p class="cardDetails"><span>Details:</span> <?php print $description; ?></p>
 <?php endif; ?>
 
 <?php if (strlen($times) > 0) : ?>
-<h5 class="cardTimes"><?php print $times; ?></h5>
+<h5 class="cardTimes"><span>Times:</span> <?php print $times; ?></h5>
 <?php endif; ?>
 
 <?php if (strlen($contact) > 0) : ?>
-<h5 class="cardContact">Contact: <?php print $contact; ?></h5>
+<h5 class="cardContact"><span>Contact:</span> <?php print $contact; ?></h5>
 <?php endif; ?>
 
 <?php if (strlen($link) > 0) : ?>
-<h5 class="cardLink"><a href="<?php print $link; ?>">Link</a></h5>
+<h5 class="cardLink"><span>More info:</span> <a href="<?php print $link; ?>">Link</a></h5>
 <?php endif; ?>
 
 </div>

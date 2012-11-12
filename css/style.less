@@ -1102,7 +1102,7 @@ footer.entry-meta {
 /* card types */
 
 .hub .cardType {
-	background: @red;
+	background: @red!important;
 }
 .volunteer .cardType {
 	background: @blue;
@@ -1231,7 +1231,9 @@ footer.entry-meta {
 .ui-corner-right,
 .ui-corner-left,
 .ui-corner-all {
-	.border-radius(0)!important;
+	-moz-border-radius: 0!important;
+	-webkit-border-radius: 0!important;
+	border-radius: 0!important;
 }
 
 .sws-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected a,
