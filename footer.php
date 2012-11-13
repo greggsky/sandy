@@ -25,7 +25,7 @@
 			</div>
 			-->
 			<div class="weather">
-				<h3 class="footer-title">Weather update:</h3>
+				<h3 class="footer-title"><a href="http://occupyweather.tumblr.com/">OccupWeather Update:</a></h3>
 				<script src="http://widgets.twimg.com/j/2/widget.js"></script><!-- first box --><script>
 				new TWTR.Widget({
 				  version: 2,
