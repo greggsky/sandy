@@ -475,6 +475,35 @@ dd {
 	}
 }
 
+/* forms */
+
+.form-item {
+	margin-top: 2em;
+	line-height: 1.5em;
+}
+.gfield_required {
+	color: @red;
+}
+input[type="checkbox"], 
+input[type="radio"] {
+	margin-left: 15px;
+}
+.edit-value {
+	margin-top: .25em;
+	label {
+		white-space: nowrap;
+		font-weight: normal;
+	}
+}
+.content.description {
+	font-style: italic;
+	margin-top: .5em;
+}
+.form-submit {
+	.btnSmall;
+}
+
+
 
 /* menus */
 
@@ -737,7 +766,7 @@ hr {
 }
 
 
-.entry-date {
+.entry-date, .sep {
 	font-style: italic;
 	color: @grayC;
 }
@@ -745,6 +774,7 @@ hr {
 
 .entry-summary {
 	margin-bottom: 2em;
+	max-width: 700px;
 }
 
 
@@ -752,6 +782,44 @@ footer.entry-meta {
 	color: @grayC;
 	.small;
 }
+
+
+/* blog */
+
+.blog, .single-post {
+	.entry-title {
+		margin-bottom: -7px;
+	}
+	footer.entry-meta {
+		border-bottom: 1px solid #DDD;
+		margin-bottom: 2em;
+		padding-bottom: 10px;
+	}
+}
+
+.single-post .entry-content {
+	margin: 1.5em 0;
+	p {
+		margin-bottom: 1em;
+	}
+}
+
+/* community pages */
+
+
+.page-child {
+	.entry-title {
+		margin-bottom: -10px;
+	}
+	.entry-content {
+		h1, h2, h3, h4, h5, h6, dl, ol, ul {
+			margin-top: 1.5em;
+		}
+	}
+}
+
+
+/* widgets */
 
 
 .start-widget {
@@ -764,7 +832,9 @@ footer.entry-meta {
 	list-style: none; 
 	li {
 		font-size: 14px;
-		margin-bottom: .75em;
+		border-top: 1px dotted #EEE;
+		padding-top: .5em;
+		padding-bottom: .75em;
 	}
 	span {
 		font-size: 22px;
@@ -816,6 +886,52 @@ footer.entry-meta {
 }
 
 
+/* home page feeds */
+
+
+.twtr-widget, .twtr-doc {
+	width: 100%!important;
+}
+
+.twtr-hd, .twtr-ft {
+	display: none;
+}
+
+.twtr-widget .twtr-tweet {
+	border-bottom: 1px dotted #CCC;
+	padding: 15px;
+}
+.twtr-user {
+	display: none!important;
+}
+
+.twtr-widget em, .twtr-widget .twtr-new-results {
+	font-size: 12px!important;
+	font-style: italic;
+	a {
+		color: #999;
+		&:hover {
+			color: @blue;
+		}
+	}
+}
+.twtr-widget .twtr-tweet-wrap {
+	padding: 0;
+}
+.twtr-img {
+	height: 25px;
+	width: 25px;
+	margin-top: 5px;
+}
+
+.twitter-timeline {
+	border-top: 1px dotted #CCC;
+	font-size: 12px;
+	.caps;
+	padding: 0 25px 10px;
+	display: block;
+	color: @blue;
+}
 
 .smm-item {
 	border-bottom: 1px solid #CCC;
@@ -968,20 +1084,6 @@ footer.entry-meta {
 .keyFood {
 	.key;
 	color: @yellow;
-}
-
-/* subpages (community pages) */
-
-
-.page-child {
-	.entry-title {
-		margin-bottom: -.5em;
-	}
-	.entry-content {
-		h1, h2, h3, h4, h5, h6, dl, ol, ul {
-			margin-top: 1.5em;
-		}
-	}
 }
 
 
@@ -1258,7 +1360,7 @@ footer.entry-meta {
 
 /* Tabs widget */
 .ui-tabs { position: relative; padding: 0; zoom: 1; padding: 0!important; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
-.ui-tabs .ui-tabs-nav { margin: 0; padding: 0!important; background-color: #999; height: 36px; border: 0!important;}
+.ui-tabs .ui-tabs-nav { margin: 0!important; padding: 0!important; background-color: #999; height: 36px; border: 0!important;}
 .ui-tabs .ui-tabs-nav li { list-style: none; float: left; background-color: #999; position: relative; top: 0; margin: 0; border-bottom: 0 !important; padding: 0; white-space: nowrap; line-height: 36px; font-size: 24px; .condensed;  border-right: 1px;}
 .ui-tabs .ui-tabs-nav li a { float: left; padding: 0 25px!important; line-height: 36px; text-decoration: none; color: #FFF; }
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected { margin-bottom: 0; padding-bottom: 0; }
