@@ -113,7 +113,7 @@ $filters['type'] = array(
 	'values' => get_occupy_sandy_possible_values_for('get_type_classes'),
 	'prefix' => '',
 	'label-filter' => 'ucfirst',
-	'label-text' => array('all' => 'All Types', 'hub' => 'Distribution Center', 'unknown' => 'Other'),
+	'label-text' => array('all' => 'All Types', 'hub' => 'Distribution Centers', 'unknown' => 'Other'),
 );
 $filters['region'] = array(
 	'values' => get_occupy_sandy_possible_values_for('get_region_classes'),
