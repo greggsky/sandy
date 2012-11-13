@@ -61,7 +61,7 @@ endif; ?></h5>
 <?php endif; ?>
 
 <?php if (strlen($link) > 0) : ?>
-<h5 class="cardLink"><span>More info:</span> <a href="<?php print $link; ?>">Link</a></h5>
+<h5 class="cardLink"><a href="<?php print $link; ?>">More info:</a></h5>
 <?php endif; ?>
 
 </div>
