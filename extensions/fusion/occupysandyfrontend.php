@@ -27,12 +27,17 @@ class OccupySandyCard {
 		
 		if ($this->is_drop_off()) :
 			$this->cardClasses[] = 'dropoff';
-			$this->cardTitle = 'Drop-Off '.($this->is_volunteer() ? '+ Volunteer' : 'Only');
+
+			// We may have already gotten a title, if this is a distro center.
+			if (strlen($this->cardTitle) < 1) :
+				$this->cardTitle = 'Drop-Off '.($this->is_volunteer() ? '+ Volunteer' : 'Only');
+			endif;
 		endif;
 
 		if ($this->is_volunteer()) :
 			$this->cardClasses[] = 'volunteer';
 			
+			// We may have already gotten a title, if this is a distro center or a drop-off+volunteer location
 			if (strlen($this->cardTitle) < 1) :
 				$this->cardTitle = 'Volunteer Only';
 			endif;
@@ -93,10 +98,10 @@ class OccupySandyCard {
 		return (0<preg_match('/\b'.$what.'\b/i', $type));	
 	}
 	function is_drop_off () {
-		return $this->has_type('drop-?off');
+		return ($this->has_type('drop-?off') or $this->is_distro_center());
 	}
 	function is_volunteer () {
-		return $this->has_type('volunteer');
+		return ($this->has_type('volunteer') or $this->is_distro_center());
 	}
 	function is_distro_center () {
 		return $this->has_type('main distribution center');
