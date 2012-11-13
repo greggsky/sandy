@@ -233,7 +233,7 @@ get_header(); ?>
 
 		<div class="card tile-always-display">
 			<h5 class="cardType">Start Your Own</h5>
-			<p>Sorry, no locations match your search. If there is an urgent need in the area you were searching in, please let us know at <a href="mailto:OccupySandy@interoccupy.net">OccupySandy@interoccupy.net</a></p>
+			<p class="cardDetails">If there is an urgent need in the area you were searching in, please let us know at <a href="mailto:OccupySandy@interoccupy.net">OccupySandy@interoccupy.net</a></p>
 		</div>
 		</div>
 
