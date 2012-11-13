@@ -232,8 +232,8 @@ get_header(); ?>
 		<?php the_occupy_sandy_cards(); ?>
 
 		<div class="card tile-always-display">
-			<h5 class="cardType">Start Your Own</h5>
-			<p>Contact us about setting up your own relief center!</p>
+			<h5 class="cardType">Can't Find It?</h5>
+			<p>If there is an urgent need in the area you were searching in, please let us know at <a href="mailto:OccupySandy@interoccupy.net">OccupySandy@interoccupy.net</a></p>
 		</div>
 		</div>
 
