@@ -25,9 +25,40 @@
 			</div>
 			-->
 			<div class="weather">
-				<h3 class="footer-title">Weather update:</h3>
+				<script src="http://widgets.twimg.com/j/2/widget.js"></script><!-- first box --><script>
+				new TWTR.Widget({
+				  version: 2,
+				  type: 'profile',
+				  rpp: 6,
+				  interval: 6000,
+				  width: 400,
+				  height: 180,
+				  theme: {
+					shell: {
+					  background: 'transparent',
+					  color: '#222'
+					},
+					tweets: {
+					  background: 'transparent',
+					  color: '#222',
+					  links: '#0085BF'
+					}
+				  },
+				  features: {
+					scrollbar: true,
+					loop: false,
+					live: false,
+					hashtags: true,
+					timestamp: true,
+					avatars: false,
+					behavior: 'all'
+				  }
+				}).render().setUser('Occuweather').start();
+				</script>
+				
+				<!--<h3 class="footer-title">Weather update:</h3>
 				<p>Cold front brings end to warm conditions on Tuesday. Rain will be heavy at times. Areas affected by Hurricane Sandy should prepare for flooding due to backed up storm drains.</p>
-				<h5 class="footer-updated">Updated Nov 12 at 1:41pm</h5>
+				<h5 class="footer-updated">Updated Nov 12 at 1:41pm</h5>-->
 			</div>		
 			<div class="contact">
 				<h3 class="footer-title">Contact us:</h3>
