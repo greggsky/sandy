@@ -764,7 +764,8 @@ hr {
 
 
 
-#menu-item-602, #menu-item-603 {
+#menu-item-602, #menu-item-603, 
+#menu-item-3094, #menu-item-3095 {
 	a {
 		.socialgram;
 		font-size: 40px;
@@ -861,7 +862,12 @@ footer.entry-meta {
 }
 
 
-/* widgets */
+/* sidebar widgets */
+
+
+.widget-title {
+	display: none;
+}
 
 
 .start-widget {
@@ -1047,11 +1053,23 @@ footer.entry-meta {
 		font-size: 30px;
 		margin-left: 5px;
 	}
-	.about, .events {
-		padding: 25px 0 25px 25px;
+	.about {
+		.column(6);
+		padding: 25px;
 	}
-	.contact {
-		padding: 25px;		
+	.events, .contact, .weather {
+		.column(3);
+		padding: 25px 25px 25px 0;		
+		dt {
+			margin-top: .5em;
+		}
+		h6 {
+			font-style: italic;
+			color: #AAA;
+		}
+	}
+	.footer-title {
+		margin-top: 0;
 	}
 }
 
@@ -1074,31 +1092,10 @@ footer.entry-meta {
 }
 
 
-.events-title, .contact-title {
-	margin-top: 0;
-}
-
-.about {
-	.column(6);
-	padding: 20px;
-}
-.events {
-	.column(3);
-	padding: 20px;
-	dt {margin-top: .5em}
-}
-.contact {
-	.column(3);
-	padding: 20px;
-	dt {margin-top: .5em}
-}
 
 
-/* widgets */
 
-.widget-title {
-	display: none;
-}
+
 
 
 
