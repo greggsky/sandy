@@ -48,7 +48,7 @@ function betterCardTitles ($title, $card) {
 // Here is a way to add or subtract classes on the fly.
 function betterCardClasses ($classes, $card) {
 	if ($card->has_type('Food\s*Not\s*Bombs')) :
-		$classes[] = 'FoodNotBombs';
+		$classes[] = 'food';
 	endif;
 	return $classes;
 }
@@ -226,8 +226,8 @@ get_header(); ?>
 		<?php the_occupy_sandy_cards(); ?>
 
 		<div class="card tile-always-display">
-		<h5 class="cardType">Start Your Own</h5>
-		<p>This is always displayed, even if the filter turns up no results.</p>
+			<h5 class="cardType">Start Your Own</h5>
+			<p>No results in that area. Contact us about setting up your own relief center!</p>
 		</div>
 		</div>
 

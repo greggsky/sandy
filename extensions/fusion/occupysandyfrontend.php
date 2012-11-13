@@ -21,7 +21,7 @@ class OccupySandyCard {
 		$this->cardTitle = '';
 
 		if ($this->is_distro_center()) :
-			$this->cardClasses[] = 'droppoff volunteer hub';
+			$this->cardClasses[] = 'hub';
 			$this->cardTitle = 'Main Distribution Center';
 		endif;
 		

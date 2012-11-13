@@ -969,8 +969,7 @@ footer.entry-meta {
 .options-container {
 	float: left;
 	list-style: none;
-	margin-left: 25px;
-	margin-top: 5px;
+	margin: 5px 25px;
 	li {
 		.inlineBlock;
 		margin-right: -4px;
@@ -994,20 +993,23 @@ footer.entry-meta {
 	}
 }
 
+.options-container + .options-container {
+	margin-bottom: 15px;
+}
 
 .container {
 	.clearfix;
 	clear: both;
 	background: @grayF;
-	padding: 25px;
-	margin-top: 20px;
+	padding: 25px 0;
+	margin-bottom: -25px;
 	width: 100%;
 }
 
 .card {
 	float: left;
 	width: 300px;
-	margin: 15px 0 15px 15px;
+	margin: 0 0 25px 25px;
 	padding: 0 15px 10px;
 	background: @white;
 	box-shadow: 3px 3px 25px -10px black; /*MP*/
@@ -1116,7 +1118,7 @@ footer.entry-meta {
 .unknown .cardType {
 	background: @grayC;
 }
-.FNB .cardType {
+.food .cardType {
 	background: @grayA;
 }
 .tile-always-display .cardType {
