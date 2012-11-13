@@ -267,6 +267,8 @@ blockquote {
 	margin-top: 1.5em;
 	padding: 25px 50px;
 	border-top: 1px solid #BBB;
+	border-bottom: 1px solid #BBB;
+	margin-bottom: 2em;
     position: relative;
 	&:before, &:after {
     	font-family: "entypo";
@@ -291,6 +293,12 @@ blockquote {
 		margin: 0;
 	}
 }
+
+.home blockquote {
+	border-bottom: 0;
+	margin-bottom: .5em;
+}
+
 
 cite {
 	font-size: 12px;
@@ -683,10 +691,12 @@ hr {
 		-webkit-transition-property: background-color;
 		-webkit-transition-duration: 100ms;	
 	}
-	a:hover, .current-menu-item a {
+	a:hover, .current-menu-item a, .current-page-ancestor a {
 		background: @yellow;
 	}
 }
+
+
 
 #menu-item-602, #menu-item-603 {
 	a {
@@ -960,6 +970,21 @@ footer.entry-meta {
 	color: @yellow;
 }
 
+/* subpages (community pages) */
+
+
+.page-child {
+	.entry-title {
+		margin-bottom: -.5em;
+	}
+	.entry-content {
+		h1, h2, h3, h4, h5, h6, dl, ol, ul {
+			margin-top: 1.5em;
+		}
+	}
+}
+
+
 
 /******* ISOTOPE *******/
 
@@ -1207,7 +1232,7 @@ footer.entry-meta {
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {.sans; font-size: 14px; }
 .ui-widget-content { border: 0!important; background: #F9F9F9!important; color: @grayA; }
 .ui-widget-content a { color: @grayA; }
-.ui-widget-header { border: 0; background: #999; color: #FFF; font-weight: bold; }
+.ui-widget-header { border: 0; background: #999!important; color: #FFF; font-weight: bold; }
 .ui-widget-header a { color: #FFF; }
 
 /* Interaction states
