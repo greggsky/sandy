@@ -432,9 +432,6 @@ button, .button,
 }
 
 
-/******* FORMS *******/
-
-
 
 
 
@@ -491,7 +488,7 @@ ol.counter {
 		counter-increment:li;
 		position:absolute;
 	    top:-2px;
-	    left:-2em;
+	    left:0;
 		font-size: 22px;
 		line-height: 20px;
 		margin-right: 10px;
@@ -524,10 +521,14 @@ input[type="radio"] {
 	font-style: italic;
 	margin-top: .5em;
 }
-.form-submit {
-	.btnSmall;
-}
 
+input#submit, input.form-submit {
+	.btnSmall;
+	.caps;
+	font-weight: bold;
+	.border-radius();
+	border: 0;
+}
 
 
 /* menus */
@@ -789,7 +790,7 @@ hr {
 	color: @yellow;
 }
 
-.home .page-title {
+.home .page-title, .home .entry-title {
 	display: none;
 }
 
@@ -924,11 +925,13 @@ footer.entry-meta {
 }
 
 
-/* home page feeds */
+/* home page twitter feed */
 
 
 .twtr-widget, .twtr-doc {
 	width: 100%!important;
+	margin-top: -20px;
+	margin-bottom: -20px;
 }
 
 .twtr-hd, .twtr-ft {
@@ -936,26 +939,41 @@ footer.entry-meta {
 }
 
 .twtr-widget .twtr-tweet {
-	border-bottom: 1px dotted #CCC;
-	padding: 15px;
+	border-bottom: 1px solid #CCC;
+	padding: 0!important;
 }
 .twtr-user {
 	display: none!important;
 }
+.tweet-url, .username {
+	color: #999!important;
+	&:hover {
+		color: @blue!important;
+		text-decoration: none!important;
+	}
+}
+
+.twtr-widget .twtr-tweet-text p {
+	line-height: 1.5em!important;
+}
 
 .twtr-widget em, .twtr-widget .twtr-new-results {
 	font-size: 12px!important;
-	font-style: italic;
+	font-style: italic!important;
 	a {
-		color: #999;
+		color: #999!important;
 		&:hover {
-			color: @blue;
+			color: @blue!important;
 		}
 	}
 }
-.twtr-widget .twtr-tweet-wrap {
-	padding: 0;
+.twtr-timestamp {
+	font-weight: bold;
 }
+.twtr-widget .twtr-tweet-wrap {
+	padding: 15px 10px;
+}
+
 .twtr-img {
 	height: 25px;
 	width: 25px;
@@ -963,13 +981,15 @@ footer.entry-meta {
 }
 
 .twitter-timeline {
-	border-top: 1px dotted #CCC;
-	font-size: 12px;
-	.caps;
-	padding: 0 25px 10px;
+	border-top: 1px solid #CCC;
+	font-size: 11px;
+	padding: 8px 10px 10px;
 	display: block;
 	color: @blue;
 }
+
+
+/* home page all news feed */
 
 .smm-item {
 	border-bottom: 1px solid #CCC;
@@ -977,7 +997,7 @@ footer.entry-meta {
 	overflow: hidden;
 	overflow-y: scroll;
 	padding: 5px 50px 0!important;
-	background-position: 5px 10px!impor	tant;
+	background-position: 13px 12px!important;
 	p {
 		font-size: 14px;
 	}
