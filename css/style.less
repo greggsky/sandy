@@ -250,10 +250,10 @@ p {
 h1 {font-size: 36px; .condensed;}
 h2 {font-size: 22px; .caps;}
 h3 {font-size: 18px;}
-h4 {font-size: 14px;}
+h4 {font-size: 15px;}
 h5 {font-size: 13px;}
 h6 {font-size: 12px;}
-p, label, li  {font-size: 16px;}
+p, label, li  {font-size: 15px;}
 
 .small {font-size: 12px;}
 .caps {text-transform: uppercase; letter-spacing: 1px; line-height: 1.2em;}
@@ -410,7 +410,7 @@ button, .button,
 		width: 100%;
 	}
 	.form-allowed-tags {
-		font-size: 14px;
+		font-size: 13px;
 	}
 	input[type="button"], input[type="submit"], input[type="reset"] {
 		.btnSmall;
@@ -459,7 +459,7 @@ dd {
 }
 
 #content ol {
-	margin: 2em 50px;
+	margin: 2em 50px!important;
 	li {
 		margin-bottom: .5em;
 	}
@@ -492,7 +492,7 @@ dd {
 	a {
 		.sans;
 		border-bottom: 1px solid @grayE;
-		font-size: 14px;
+		font-size: 15px;
 		line-height: 1em;
 		padding: 10px;
 		width: 150px;
@@ -692,6 +692,7 @@ hr {
 		font-size: 40px;
 		padding: 0;
 		width: 44px;
+		height: 44px;
 		line-height: 40px;
 		text-align: center;
 	}
@@ -743,12 +744,15 @@ footer.entry-meta {
 	list-style: none; 
 	li {
 		font-size: 14px;
-		margin-bottom: .5em;
+		margin-bottom: .75em;
 	}
 	span {
-		font-size: 13px;
-		.caps;
-		margin-right: 3px;
+		font-size: 22px;
+		line-height: 20px;
+		margin-right: 10px;
+		font-weight: bold;
+		color: #BBB;
+		float: left;
 	}
 }
 
@@ -841,11 +845,11 @@ footer.entry-meta {
 
 #site-generator {
 	background: @black;
-	color: @grayC;
+	color: @grayB;
 	padding: 5px 25px 10px;
 	.small;
 	a {
-		color: @grayC;
+		color: @grayB;
 		font-weight: 400;
 		&:hover {
 			color: @white;
@@ -863,12 +867,12 @@ footer.entry-meta {
 	padding: 20px;
 }
 .events {
-	.column(2);
+	.column(3);
 	padding: 20px;
 	dt {margin-top: .5em}
 }
 .contact {
-	.column(4);
+	.column(3);
 	padding: 20px;
 	dt {margin-top: .5em}
 }
@@ -969,7 +973,7 @@ footer.entry-meta {
 .options-container {
 	float: left;
 	list-style: none;
-	margin: 5px 25px;
+	margin: 0 25px 5px;
 	li {
 		.inlineBlock;
 		margin-right: -4px;
@@ -1061,6 +1065,10 @@ footer.entry-meta {
 .cardStatus {
 	color: @red;
 	font-size: 15px;
+}
+.cardDetails {
+	color: @grayA;
+	font-size: 14px;
 }
 .cardTimes, .cardContact, .cardLink {
 	font-weight: bold;
