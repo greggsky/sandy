@@ -25,6 +25,7 @@
 			</div>
 			-->
 			<div class="weather">
+				<h3 class="footer-title">Weather update:</h3>
 				<script src="http://widgets.twimg.com/j/2/widget.js"></script><!-- first box --><script>
 				new TWTR.Widget({
 				  version: 2,
@@ -56,7 +57,7 @@
 				}).render().setUser('Occuweather').start();
 				</script>
 				
-				<!--<h3 class="footer-title">Weather update:</h3>
+				<!--
 				<p>Cold front brings end to warm conditions on Tuesday. Rain will be heavy at times. Areas affected by Hurricane Sandy should prepare for flooding due to backed up storm drains.</p>
 				<h5 class="footer-updated">Updated Nov 12 at 1:41pm</h5>-->
 			</div>		
