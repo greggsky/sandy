@@ -62,9 +62,14 @@ add_filter('occupysandy_card_classes', 'betterCardClasses', 2, /*priority=*/ 200
 function options_filter_ul ($filters, $axis) {
 	$prefix = $filters['prefix'];
 	$lf = $filters['label-filter'];
+
+	$allLabelText = 'All';
+	if (isset($filters['label-text']) and isset($filters['label-text']['all'])) :
+		$allLabelText = $filters['label-text']['all'];
+	endif;
 ?>
 <ul class="options-container options-for-<?php print $axis; ?>">
-<li><a href="#" id="filter-class-<?php print $axis; ?>-ALL" class="filter-class selected">All</a></li>
+<li><a href="#" id="filter-class-<?php print $axis; ?>-ALL" class="filter-class selected"><?php print $allLabelText; ?></a></li>
 <?php
 foreach ($filters['values'] as $vv => $N) :
 	$pair = array_map('urldecode', split("/", $vv, 2));
@@ -108,12 +113,13 @@ $filters['type'] = array(
 	'values' => get_occupy_sandy_possible_values_for('get_type_classes'),
 	'prefix' => '',
 	'label-filter' => 'ucfirst',
-	'label-text' => array('unknown' => 'Other'),
+	'label-text' => array('all' => 'All Types', 'unknown' => 'Other'),
 );
 $filters['region'] = array(
 	'values' => get_occupy_sandy_possible_values_for('get_region_classes'),
 	'prefix' => '',
 	'default' => 'Other',
+	'label-text' => array('all' => 'All Locales'),
 );
 
 // Here is a way to clean up label text that you do not like.
