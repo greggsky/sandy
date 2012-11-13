@@ -233,7 +233,7 @@ get_header(); ?>
 
 		<div class="card tile-always-display">
 			<h5 class="cardType">Start Your Own</h5>
-			<p>No results in that area. Contact us about setting up your own relief center!</p>
+			<p>Contact us about setting up your own relief center!</p>
 		</div>
 		</div>
 

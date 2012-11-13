@@ -475,6 +475,31 @@ dd {
 	}
 }
 
+ol.counter {
+	counter-reset: li;
+	li {
+		border-bottom: 1px dotted #EEE;
+		list-style:none;
+		padding-top: .5em;
+		padding-bottom: .75em;
+	}
+	li:first-child {
+		border-top: 1px dotted #EEE;
+	}
+	li:before {
+		content:counter(li);
+		counter-increment:li;
+		position:absolute;
+	    top:-2px;
+	    left:-2em;
+		font-size: 22px;
+		line-height: 20px;
+		margin-right: 10px;
+		font-weight: bold;
+		color: #BBB;	    
+	}
+}
+
 /* forms */
 
 .form-item {
@@ -579,6 +604,14 @@ hr {
 	}
 	.entry-header, .entry-content {
 		padding: 0 25px;
+		max-width: 900px;
+	}
+	.entry-title {
+		margin-top: .5em;
+		margin-bottom: -.5em;
+	}
+	.entry-content p {
+		margin-top: 1.5em;
 	}
 }
 
@@ -755,6 +788,11 @@ hr {
 	margin: 0;
 	color: @yellow;
 }
+
+.home .page-title {
+	display: none;
+}
+
 .page-subtitle {
 	margin-top: 0;
 	font-size: 18px;
@@ -1108,9 +1146,10 @@ footer.entry-meta {
 /* filters */
 
 .options-container {
-	float: left;
 	list-style: none;
-	margin: 0 25px 5px;
+	background: @grayF;
+	margin: 0!important;
+	padding: 10px 25px 0;
 	li {
 		.inlineBlock;
 		margin-right: -4px;
@@ -1372,7 +1411,7 @@ footer.entry-meta {
 .ui-accordion .ui-accordion-header {
 	border-left: 0;
 	border-right: 0;
-	margin-top: -1px;	
+	margin-top: -1px!important;	
 }
 .ui-accordion-icons .ui-accordion-header a,
 .ui-accordion .ui-accordion-header a {
