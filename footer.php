@@ -19,8 +19,9 @@
 	
 			</div>
 			<div class="events">
-				<h3 class="events-title">Next meeting:</h3>
+				<!-- <h3 class="events-title">Next meeting:</h3>
 				<p>None scheduled. Check back for the next call.</p>
+				-->
 			</div>
 			<div class="contact">
 				<h3 class="contact-title">Contact us:</h3>
