@@ -250,7 +250,7 @@ p {
 h1 {font-size: 36px; .condensed;}
 h2 {font-size: 22px; .caps;}
 h3 {font-size: 18px;}
-h4 {font-size: 15px;}
+h4 {font-size: 14px;}
 h5 {font-size: 13px;}
 h6 {font-size: 12px;}
 p, label, li  {font-size: 15px;}
@@ -395,6 +395,8 @@ button, .button,
 	.caps;
 	font-weight: bold;
 	border-bottom: 2px solid @blue;
+	display: block;
+	margin-left: 15px;
 }
 
 
@@ -698,6 +700,15 @@ hr {
 	}
 }
 
+.communities {
+	.caps;
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: 0;
+}
+
+
+
 /* content */
 
 .page-title {
@@ -710,10 +721,9 @@ hr {
 	font-size: 18px;
 }
 
-
-
 .entry-title {
-	display: none;
+	margin-top: 0;
+	color: @grayA;
 }
 
 
@@ -1230,6 +1240,34 @@ footer.entry-meta {
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; background: @yellow; color: @white;}
 .ui-tabs .ui-tabs-panel { display: block; border-width: 0; padding: 0!important; background: #F9F9F9; }
 .ui-tabs .ui-tabs-hide { display: none !important; }
+
+/* Accordion widget */
+.ui-accordion .ui-accordion-header {
+	border-left: 0;
+	border-right: 0;
+	margin-top: -1px;	
+}
+.ui-accordion-icons .ui-accordion-header a,
+.ui-accordion .ui-accordion-header a {
+	font-size: 15px;
+	padding: 10px 10px 12px 35px!important;
+	font-weight: bold;
+	&:hover {
+		background: @white;
+	}
+}
+
+.ui-accordion .ui-state-hover a, 
+.ui-accordion .ui-state-hover a:hover {
+	background: @white;
+}
+.ui-accordion .ui-accordion-content {
+	margin-bottom: 0;
+	padding: 10px 35px 15px 35px!important;
+	a {
+		color: #0085BF;
+	}
+}
 
 /* Corner radius */
 .ui-corner-tl,

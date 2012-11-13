@@ -24,14 +24,9 @@
 			</div>
 			<div class="contact">
 				<h3 class="contact-title">Contact us:</h3>
-				<dl>
-					<dt>General Inquiries:</dt>
-					<dd><a href="mailto:OccupySandy@interoccupy.net"> OccupySandy@interoccupy.net</a></dd>
-					<dt>Press:</dt>
-					<dd><a href="mailto:SandyPress@interoccupy.net"> SandyPress@interoccupy.net</a></dd>
-					<dt>Medics:</dt>
-					<dd><a href="mailto:SandyMedics@interoccupy.net"> SandyMedics@interoccupy.net</a></dd>
-				</dl>
+				<p><span>General Inquiries:</span><a href="mailto:OccupySandy@interoccupy.net"> OccupySandy@interoccupy.net</a></p>
+				<p><span>Press:</span><a href="mailto:SandyPress@interoccupy.net"> SandyPress@interoccupy.net</a></p>
+				<p><span>Medics:</span><a href="mailto:SandyMedics@interoccupy.net"> SandyMedics@interoccupy.net</a></p>
 			</div>		
 	</footer>
 
