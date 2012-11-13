@@ -475,23 +475,24 @@ dd {
 ol.counter {
 	counter-reset: li;
 	li {
-		border-bottom: 1px dotted #EEE;
+		position: relative;
+		padding-left: 20px;
+		border-bottom: 1px dotted #DDD;
 		list-style:none;
 		padding-top: .5em;
 		padding-bottom: .75em;
 	}
 	li:first-child {
-		border-top: 1px dotted #EEE;
+		border-top: 1px dotted #DDD;
 	}
 	li:before {
 		content:counter(li);
 		counter-increment:li;
 		position:absolute;
-	    top:-2px;
-	    left:0;
+	    top: 0;
+	    left: 0;
 		font-size: 22px;
 		line-height: 20px;
-		margin-right: 10px;
 		font-weight: bold;
 		color: #BBB;	    
 	}
@@ -925,6 +926,25 @@ footer.entry-meta {
 }
 
 
+/* polylanguage widget */
+
+.widget_polylang {
+	ul {
+		margin: -10px 0 25px;
+		list-style: none;
+	}
+	li {
+		.inlineBlock;
+		font-size: 12px;
+		margin-right: 5px;
+		line-height: 1em;
+	}
+}
+
+#menu-local-menu .lang-item {
+	display: none;
+}
+
 /* home page twitter feed */
 
 
@@ -971,7 +991,7 @@ footer.entry-meta {
 	font-weight: bold;
 }
 .twtr-widget .twtr-tweet-wrap {
-	padding: 15px 10px;
+	padding: 15px 10px!important;
 }
 
 .twtr-img {
