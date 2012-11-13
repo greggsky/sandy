@@ -346,6 +346,10 @@ pre {
 	background: @grayF;
 }
 
+.entry-content h2 {
+	margin-top: 1.5em;
+}
+
 
 /* links */
 
@@ -463,6 +467,10 @@ dt {
 	font-weight: 400;
 }
 dd {
+}
+
+#content ol, #content ul, #mw_content ol, #mw_content ul {
+	margin: 0 25px 25px;
 }
 
 #content ol {
@@ -831,12 +839,21 @@ footer.entry-meta {
 
 .blog, .single-post {
 	.entry-title {
-		margin-bottom: -7px;
+		line-height: 1.1em;
+		margin-bottom: 0;
 	}
 	footer.entry-meta {
 		border-bottom: 1px solid #DDD;
 		margin-bottom: 2em;
 		padding-bottom: 10px;
+	}
+	.post-thumbnail {
+		float: right;
+		margin: 0 0 15px 25px;
+	}
+	#author-avatar {
+		float: left;
+		margin: 0 20px 10px 0;
 	}
 }
 
