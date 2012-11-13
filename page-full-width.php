@@ -44,7 +44,7 @@ get_header(); ?>
 			<?php get_template_part( 'content', 'page' ); ?>
                 </div>
 
-		<?php comments_template( '', true ); ?>
+		<?php //comments_template( '', true ); ?>
 
 			</div><!-- #content -->
 		</div><!-- #primary -->
