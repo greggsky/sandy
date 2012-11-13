@@ -474,13 +474,15 @@ dd {
 
 ol.counter {
 	counter-reset: li;
+	margin: 2em 30px!important;
 	li {
 		position: relative;
-		padding-left: 20px;
+		padding-left: 24px;
 		border-bottom: 1px dotted #DDD;
 		list-style:none;
-		padding-top: .5em;
-		padding-bottom: .75em;
+		padding-top: .75em;
+		padding-bottom: 1em;
+		margin: 0!important;
 	}
 	li:first-child {
 		border-top: 1px dotted #DDD;
@@ -489,7 +491,7 @@ ol.counter {
 		content:counter(li);
 		counter-increment:li;
 		position:absolute;
-	    top: 0;
+	    top: 12px;
 	    left: 0;
 		font-size: 22px;
 		line-height: 20px;
@@ -704,8 +706,8 @@ hr {
 
 #site-title {
 	margin: 0;
-	font-size: 54px;
-	line-height: 46px;
+	font-size: 48px;
+	line-height: 42px;
 	position: relative;
 	span {
 		position: absolute;
@@ -713,7 +715,7 @@ hr {
 		.text-shadow(0 0 10px rgba(0, 0, 0, 0.4));
 		height: 150px;
 		width: 150px;
-		padding: 7px;
+		padding: 12px 0 0;
 	}
 	a {
 		color: @white;
