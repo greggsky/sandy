@@ -84,7 +84,7 @@ class FusionTable {
 
 				// Oh my God this is so horribly ugly.
 				if (is_null($data) and preg_match('/NaN/', $json)) :
-					$json = preg_replace('/^(\s*)NaN(,\s*)$/m', '$1null$2', $json);
+					$json = preg_replace('/^(\s*)NaN(,\s*)?$/m', '$1null$2', $json);
 					$data = json_decode($json);
 				endif;
 
