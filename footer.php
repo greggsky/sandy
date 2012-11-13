@@ -24,17 +24,17 @@
 				<p>None scheduled. Check back soon for the next call.</p>
 			</div>
 			-->
+			<div class="weather">
+				<h3 class="footer-title">Weather update:</h3>
+				<p>Cold front brings end to warm conditions on Tuesday. Rain will be heavy at times. Areas affected by Hurricane Sandy should prepare for flooding due to backed up storm drains.</p>
+				<h5 class="footer-updated">Updated Nov 12 at 1:41pm</h5>
+			</div>		
 			<div class="contact">
 				<h3 class="footer-title">Contact us:</h3>
 				<p><span>General Inquiries:</span><a href="mailto:OccupySandy@interoccupy.net"> OccupySandy@interoccupy.net</a></p>
 				<p><span>Press:</span><a href="mailto:SandyPress@interoccupy.net"> SandyPress@interoccupy.net</a></p>
 				<p><span>Medics:</span><a href="mailto:SandyMedics@interoccupy.net"> SandyMedics@interoccupy.net</a></p>
 			</div>
-			<div class="weather">
-				<h3 class="footer-title">Weather update:</h3>
-				<p>Cold front brings end to warm conditions tomorrow. Rain will be heavy at times. Areas affected by Hurricane Sandy should prepare for flooding due to backed up storm drains.</p>
-				<h5>Updated Nov 12 at 1:41pm</h5>
-			</div>		
 	</footer>
 
 	<footer id="colophon" role="contentinfo">
