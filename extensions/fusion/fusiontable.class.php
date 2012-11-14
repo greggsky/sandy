@@ -29,12 +29,12 @@ class FusionTable {
 		$url = 'https://www.googleapis.com/fusiontables/v1/query?sql=' . $query . '&key=' . $this->apikey;
 
 		$resp = NULL;		
-		if (isset($this->queryResults[$url]) and !$params['fresh']) :
+		/*if (isset($this->queryResults[$url]) and !$params['fresh']) :
 			$cache = $this->queryResults[$url];
 			if ($cache['baked'] < $cache['stale']) :
 				$resp = $cache['bread'];
 			endif;
-		endif;
+		endif;*/
 
 		if (is_null($resp)) :
 			$resp = wp_remote_request($url, array(
