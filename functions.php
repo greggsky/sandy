@@ -132,6 +132,36 @@ function foghorn_widgets_init() {
 		'before_title' => '<h1 class="widget-title">',
 		'after_title' => '</h1>',
 	) );
+	
+	register_sidebar( array(
+		'name' => __( 'Footer-left', 'foghorn' ),
+		'id' => 'sidebar',
+		'description' => __( 'The left footer widgets posts and pages.', 'foghorn' ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => "</aside>",
+		'before_title' => '<h3 class="footer-title">',
+		'after_title' => '</h3>',
+	) );
+	
+	register_sidebar( array(
+		'name' => __( 'Footer-middle', 'foghorn' ),
+		'id' => 'sidebar',
+		'description' => __( 'The middle footer widgets for posts and pages.', 'foghorn' ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => "</aside>",
+		'before_title' => '<h3 class="footer-title">',
+		'after_title' => '</h3>',
+	) );
+	
+	register_sidebar( array(
+		'name' => __( 'Footer-right', 'foghorn' ),
+		'id' => 'sidebar',
+		'description' => __( 'The right footer widgets for posts and pages.', 'foghorn' ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => "</aside>",
+		'before_title' => '<h3 class="footer-title">',
+		'after_title' => '</h3>',
+	) );	
 }
 add_action( 'widgets_init', 'foghorn_widgets_init' );
 
