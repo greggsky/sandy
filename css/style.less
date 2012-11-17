@@ -83,6 +83,7 @@ body #page {
 
 @yellow: #FFCD67;
 @red: #DA521F;
+@orange: (@yellow + @red);
 @blue: #0085BF;
 @green: #22B573;
 @teal: #00A99D;
@@ -180,7 +181,7 @@ body #page {
 	behavior:url(../js/PIE.htc); 
 }
 
-.transition (@transition) {
+.transition (@transition: all 200ms) {
 	-webkit-transition: @transition;
 	-moz-transition:    @transition;
 	-ms-transition:     @transition;
@@ -554,32 +555,6 @@ input#submit, input.form-submit {
 	}	
 }
 
-.sub-menu {
-	display: none;
-	float: left;
-	margin: 0;
-	position: absolute;
-	top: 44px;
-	left: 0;
-	width: 188px;
-	z-index: 99999;
-	background: @grayF;
-	li {
-		margin: 0;
-	}
-	a {
-		.sans;
-		border-bottom: 1px solid @grayE;
-		font-size: 15px;
-		line-height: 1em;
-		padding: 10px;
-		width: 150px;
-	}
-	li:hover a {
-		background: @grayC;
-	}
-}
-
 
 hr {
 	background-color: #ccc;
@@ -748,6 +723,16 @@ hr {
 	background: @grayD;
 }
 
+.menu-item ul.sub-menu{
+	display: none;
+	.transition(all 1000ms);
+}
+
+.menu-item:hover ul.sub-menu{
+	display: block;
+}
+
+
 #menu-local-menu {
 	clear: both;
 	margin: 0;
@@ -758,6 +743,7 @@ hr {
 		.condensed;
 		font-size: 26px;
 		line-height: 44px;
+		position: relative;
 		
 	}
 	a {
@@ -767,15 +753,50 @@ hr {
 		-webkit-transition-property: background-color;
 		-webkit-transition-duration: 100ms;	
 	}
-	a:hover, .current-menu-item a, .current-page-ancestor a {
+	a:hover, .current-menu-item a {
 		background: @yellow;
+	}
+	.current-page-ancestor a {
+		background: @grayD;		
+	}
+	.sub-menu {
+		width: auto;
+		z-index: 99999;
+		position: absolute;
+		top: 44px;
+		margin: 0;
+		padding: 0;
+		background: @grayD;
+		li {
+			width: 100%;
+			margin: 0;
+			border: 0;
+			border-bottom: 1px dotted @grayE;			
+		}
+		li:last-child {
+			border: 0;
+		}
+		a {
+			.sans;
+			font-size: 14px;
+			line-height: 1em;
+			padding: 8px 20px;
+			width: 100%;
+			background: @grayD;
+			white-space: nowrap;
+		}
+		li:hover a {
+			background: @yellow;
+		}
 	}
 }
 
 
+/* twitter and facebook icons in local menu */
 
-#menu-item-602, #menu-item-603, 
-#menu-item-3094, #menu-item-3095 {
+#menu-item-602, #menu-item-603, /* production */
+#menu-item-3094, #menu-item-3095, /* erica's local */
+#menu-item-3653, #menu-item-3654 /* pea's local */ {
 	a {
 		.socialgram;
 		font-size: 40px;
