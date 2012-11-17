@@ -68,15 +68,25 @@ function options_filter_ul ($filters, $axis) {
 		$allLabelText = $filters['label-text']['all'];
 	endif;
 ?>
-<ul class="options-container options-for-<?php print $axis; ?>">
-<li><a href="#" id="filter-class-<?php print $axis; ?>-ALL" class="filter-class selected"><?php print $allLabelText; ?></a></li>
+<ul class="options-container options-for-<?php print $axis; ?><?php if (isset($filters['container-classes'])) : print ' '.$filters['container-classes']; endif; ?>">
+<li><a href="#" id="filter-class-<?php print $axis; ?>-ALL" class="filter-class show-when-ALL selected"><?php print $allLabelText; ?></a></li>
 <?php
 foreach ($filters['values'] as $vv => $N) :
 	$pair = array_map('urldecode', split("/", $vv, 2));
 	$label = reset($pair);
 	$value = end($pair);
+	
+	if (is_array($N) and isset($N['label'])) :
+		$label = $N['label'];
+	endif;
+	
+	$aClasses = array('filter-class');
+	if (is_array($N) and isset($N['values'])) :
+		$aClasses = array_merge($aClasses, array_map(function ($v) { return 'show-when-'.$v; }, $N['values']));
+	endif;
+	
 ?>
-<li><a href="#" id="filter-class-<?php print $prefix . $value; ?>" class="filter-class"><?php
+<li><a href="#" id="filter-class-<?php print $prefix . $value; ?>" class="<?php print implode(" ", $aClasses); ?>"><?php
 if (strlen(trim($label)) > 0) :
 	if (is_callable($lf)) :
 		$label = $lf($label);
@@ -117,10 +127,11 @@ $filters['state'] = array(
 	'default' => 'Unlisted',
 );
 $filters['region'] = array(
-	'values' => get_occupy_sandy_possible_values_for('get_region_classes'),
+	'values' => get_mapped_occupy_sandy_possible_values_for('get_region_classes', 'get_state_classes'),
 	'prefix' => '',
 	'default' => 'Other',
 	'label-text' => array('all' => 'All Locales'),
+	'container-classes' => "affected-by-state",
 );
 
 // Here is a way to clean up label text that you do not like.
@@ -155,19 +166,65 @@ function isotope_scriptage () {
 		jQuery('.filter-class').click ( function ( e ) {
 			var filterAxisClasses = jQuery(this).closest('.options-container').attr('class').split(/\s+/);
 			var filterAxis;
+			var showWhenID;
+			var filterHideInterval = 1000;
+			
 			for (var i = 0; i < filterAxisClasses.length; i++) {
 				if (r = filterAxisClasses[i].match(/^options-for-(.*)$/)) {
-					filterAxis = r[i];
-				}
+					filterAxis = r[1];
+				}				
 			}
 
+			var linkClasses = jQuery(this).attr('class').split(/\s+/);
+			
+			for (var i = 0; i < linkClasses.length; i++) {
+				if (r = linkClasses[i].match(/^show-when-(.*)$/)) {
+					showWhenID = r[1];
+				}
+			}
+			
+			var filtersOne2Many = jQuery('.options-container')
+				.filter('.affected-by-'+filterAxis)
+				.find('.filter-class');
+			
 			var filterClass = (jQuery(this).attr('id').replace(/^filter-class-/, ''));
 
 			// Rewrite the value for this specific axis in the filtering
 			if (filterClass.match(new RegExp('^' + filterAxis + '-ALL$')) ) {
 				isotopeFilter[filterAxis] = null;
+				filtersOne2Many.closest('li').removeClass('zapped').show(filterHideInterval);
+				
+				// Make sure that all sub-classes are dispalyed.
+				jQuery(this).closest('.options-container').find('.filter-class').closest('li').filter('.subset-limited').show(filterHideInterval).removeClass('subset-limited');
+				//.closest('li').show();
 			} else {
 				isotopeFilter[filterAxis] = '.' + filterClass;
+				
+				if (showWhenID && (jQuery('#filter-class-' + showWhenID).length > 0)) {
+					var filtersMany2One = jQuery('#filter-class-' + showWhenID)
+						.closest('.options-container')
+						.find('.filter-class');
+						
+					var possibleFilters = '.show-when-ALL, #filter-class-' + showWhenID;
+					filtersMany2One.filter(possibleFilters).closest('li').removeClass('subset-limited').show(filterHideInterval);
+					filtersMany2One.filter(':not('+possibleFilters+')').closest('li').addClass('subset-limited').hide(filterHideInterval);
+					jQuery('#filter-class-' + showWhenID).click();
+				}
+				
+				// Hide irrelevant filters.
+				if (filtersOne2Many.length > 0) {
+					var selector = '.show-when-ALL, .show-when-'+filterClass;
+					
+					filtersOne2Many.filter(selector).closest('li')
+						.removeClass('zapped').show(filterHideInterval);
+					filtersOne2Many.filter(':not('+selector+')').closest('li')
+						.addClass('zapped').hide(filterHideInterval);
+						
+					// Did we just hide the current filter? If so, reset to ALL.
+					if (filtersOne2Many.filter('.selected').closest('li').filter(':not(.zapped)').length == 0) {
+						filtersOne2Many.filter('.show-when-ALL').click();
+					}
+				}
 			}
 
 			// sigh

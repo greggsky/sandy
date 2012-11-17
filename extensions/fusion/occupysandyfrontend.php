@@ -123,4 +123,33 @@ function get_occupy_sandy_possible_values_for ($fieldName, $params = array()) {
 	return $ret;
 }
 
+function get_mapped_occupy_sandy_possible_values_for ($from, $to, $params = array(), $cards = null) {
+	if (is_null($cards)) :
+		$cards = get_occupy_sandy_cards($params);
+	endif;
+	
+	$ret = array();
+	foreach ($cards as $card) :
+		$fromValue = $card->get_values($from);
+		
+		foreach ($fromValue as $idx => $v) :
+			$i = urlencode($v);
+
+			if (!isset($ret[$i])) : $ret[$i] = array(); endif;
+
+			if (!is_numeric($idx)) :
+				$ret[$i]['label'] = $idx;
+			endif;
+
+			if (!isset($ret[$i]['values'])) : $ret[$i]['values'] = array(); endif;
+			if (!isset($ret[$i]['N'])) : $ret[$i]['N'] = 0; endif;
+			
+			$toValues = $card->get_values($to);
+			$ret[$i]['values'] = array_merge($ret[$i]['values'], $toValues);
+			$ret[$i]['N'] += 1;
+		endforeach;
+	endforeach;
+	return $ret;
+}
+
 
