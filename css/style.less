@@ -2,6 +2,8 @@
 @import 'stateface.css';
 
 
+/******* MAKE CHANGES IN THE .LESS FILE, NOT THE .CSS *******/
+
 /******* GRID *******/
 /* from semantic.gs */
 
@@ -1041,7 +1043,7 @@ footer.entry-meta {
 }
 
 .footer-widget-title { /* insert the title inside the widget so we can add links */
-	margin: 0;
+	margin: 0 0 .9em 0;
 	line-height: 1em;
 }
 
@@ -1595,17 +1597,19 @@ input::-moz-focus-inner {
 
 @media screen and (max-width: 720px) {
 
-	.layout-2cl #primary,
-	#secondary {
-		width: 100%;
-		margin-bottom: 1em;
-		float: none;
+	.layout-2cl { 
+		#primary, #secondary {
+			width: 100%;
+			margin-bottom: 1em;
+			float: none;
+		}
+		
+		#menu-local-menu  {
+			
+		}
 	}
 	
-	#menu-local-menu  {
-		
-	}
-
+	
 }
 
 

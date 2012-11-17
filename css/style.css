@@ -161,7 +161,7 @@ footer.entry-meta{color:#aaaaaa;font-size:12px;}
 .twtr-img{height:25px;width:25px;margin-top:5px;}
 .twitter-timeline{border-top:1px solid #CCC;font-size:11px;padding:8px 10px 10px;display:block;color:#0085bf;}
 .footer-title{display:none;}
-.footer-widget-title{margin:0;line-height:1em;}
+.footer-widget-title{margin:0 0 .9em 0;line-height:1em;}
 #interoccupy .twtr-widget,#interoccupy .twtr-doc{margin-top:0;}
 #interoccupy .twtr-tweet-wrap{padding:15px 0px!important;}
 #interoccupy .twtr-fav,#interoccupy .twtr-rt,#interoccupy .twtr-reply{display:none;}
@@ -271,4 +271,4 @@ footer.entry-meta{color:#aaaaaa;font-size:12px;}
 .ui-state-active,.ui-widget-content .ui-state-active{border-radius:5px 5px 0 0;border-bottom:none;}
 .ui-accordion-content.ui-helper-reset.ui-widget-content.ui-corner-bottom.ui-accordion-content-active{border-top:none;border-radius:0 0 5px 5px;}
 input::-moz-focus-inner{border:0;padding:0;}
-@media screen and (max-width:720px){.layout-2cl #primary,#secondary{width:100%;margin-bottom:1em;float:none;}}@media print{body{background:none !important;font-size:10pt;} footer.entry-meta a[rel=bookmark]:link:after,footer.entry-meta a[rel=bookmark]:visited:after{content:" [" attr(href) "] ";} #page{clear:both !important;display:block !important;float:none !important;max-width:100%;position:relative !important;}}.skip-link,.section-heading{display:none;}
+@media screen and (max-width:720px){.layout-2cl #primary,.layout-2cl #secondary{width:100%;margin-bottom:1em;float:none;}}@media print{body{background:none !important;font-size:10pt;} footer.entry-meta a[rel=bookmark]:link:after,footer.entry-meta a[rel=bookmark]:visited:after{content:" [" attr(href) "] ";} #page{clear:both !important;display:block !important;float:none !important;max-width:100%;position:relative !important;}}.skip-link,.section-heading{display:none;}
