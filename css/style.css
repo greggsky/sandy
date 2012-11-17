@@ -189,7 +189,7 @@ footer.entry-meta{color:#aaaaaa;font-size:12px;}
 .keyFood{margin-right:20px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;line-height:1.2em;color:#ffcd67;}
 .volunteerPage .main,.mapsPage .main{display:inline;float:left;width:97.91666666666666%;margin:0 1.0416666666666665%;padding:0;}
 .basics{background:#ffffff;padding:25px;}
-.options-container{list-style:none;background:#eeeeee;margin:0!important;padding:10px 25px 0;}.options-container li{display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;margin-right:-4px;border-right:1px dotted #ffffff;}
+.options-container{list-style:none;background:#eeeeee;margin:0!important;padding:10px 25px 0;}.options-container li{display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;margin:0 -4px 0 0;border-right:1px dotted #ffffff;}
 .options-container a{display:block;padding:4px 11px;text-transform:uppercase;letter-spacing:1px;line-height:1.2em;font-size:12px;background:#0085bf;color:#ffffff;}
 .options-container a:hover{background:#555555;color:#ffffff;}
 .options-container .filter-class.selected{background-color:#222222;color:#ffffff;}
