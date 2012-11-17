@@ -26,7 +26,8 @@ function the_occupy_sandy_cards ($params = array()) {
 	foreach ($cards as $card) :
 		$OccupySandyCard = $card;
 
-		get_template_part('card', $card->get_card_class());
+		$primeClass = reset(explode(" ", $card->get_card_class()));
+		get_template_part('card', $primeClass);
 	endforeach;
 }
 
