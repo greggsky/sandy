@@ -135,7 +135,7 @@ function foghorn_widgets_init() {
 	
 	register_sidebar( array(
 		'name' => __( 'Footer-left', 'foghorn' ),
-		'id' => 'sidebar',
+		'id' => 'footer-left',
 		'description' => __( 'The left footer widgets posts and pages.', 'foghorn' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => "</aside>",
@@ -145,7 +145,7 @@ function foghorn_widgets_init() {
 	
 	register_sidebar( array(
 		'name' => __( 'Footer-middle', 'foghorn' ),
-		'id' => 'sidebar',
+		'id' => 'footer-middle',
 		'description' => __( 'The middle footer widgets for posts and pages.', 'foghorn' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => "</aside>",
@@ -155,7 +155,7 @@ function foghorn_widgets_init() {
 	
 	register_sidebar( array(
 		'name' => __( 'Footer-right', 'foghorn' ),
-		'id' => 'sidebar',
+		'id' => 'footer-right',
 		'description' => __( 'The right footer widgets for posts and pages.', 'foghorn' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => "</aside>",
