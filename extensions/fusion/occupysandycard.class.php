@@ -97,6 +97,28 @@ class OccupySandyCard {
 		return (isset($this->row[$i]));
 	}
 
+	function get_values ($what) {
+		
+		$values = null;
+		if (method_exists($this, $what)) :
+			$values = $this->{$what}();
+		endif;
+		
+		if (!is_array($values)) :
+			if (is_null($values)) :
+				$values = array();
+			else :
+				$values = array($values);
+			endif;
+		endif;
+		
+		if (count($values) == 0) :
+			$values[] = $this->field($what);
+		endif;
+		
+		return $values;
+	}
+	
 	function field ($i) {
 		if (!isset($this->row[$i])) :
 			$found = array_search($i, $this->cols);
