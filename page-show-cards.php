@@ -103,17 +103,18 @@ print $label;
 // FILTERING: PREPARE OPTIONS FOR FILTERING LISTS. //
 /////////////////////////////////////////////////////
 
-/* $filters['state'] = array(
-	"values" => get_occupy_sandy_possible_values_for('get_state'),
-	"prefix" => 'state-',
-	"label-filter" => 'strtoupper',
-	'default' => 'Unlisted',
-); */
 $filters['type'] = array(
 	'values' => get_occupy_sandy_possible_values_for('get_type_classes'),
 	'prefix' => '',
 	'label-filter' => 'ucfirst',
 	'label-text' => array('all' => 'All Types', 'hub' => 'Distribution Centers', 'unknown' => 'Other'),
+);
+$filters['state'] = array(
+	"values" => get_occupy_sandy_possible_values_for('get_state_classes'),
+	"prefix" => '',
+	'label-text' => array('all' => 'All States'),
+	"label-filter" => 'strtoupper',
+	'default' => 'Unlisted',
 );
 $filters['region'] = array(
 	'values' => get_occupy_sandy_possible_values_for('get_region_classes'),
@@ -126,11 +127,13 @@ $filters['region'] = array(
 $filterMap['type']['text'] = array('unknown' => 'Other');
 
 // Force the unknown / other settings to bottom.
-//$filters['state']['values'][''] = 0;
+if (isset($filters['state']['values'][''])) :
+	$filters['state']['values'][''] = 0;
+endif;
 $filters['type']['values']['unknown'] = 0;
 $filters['region']['values']['Other/region-other'] = 0;
 
-//arsort($filters['state']['values']);
+arsort($filters['state']['values']);
 arsort($filters['type']['values']);
 arsort($filters['region']['values']);
 

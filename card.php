@@ -2,7 +2,6 @@
 	// Prepare data for use in template.
 	$card = get_the_occupy_sandy_card();
 	$classes = array('card', $card->get_card_class());
-	$classes[] = "state-".$card->get_state();
 	$state = $card->get_state();
 	$address = $card->get_address();
 	$timestamp = $card->get_timestamp('U');
