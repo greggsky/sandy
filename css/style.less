@@ -1034,7 +1034,7 @@ footer.entry-meta {
 }
 
 
-/* weather tweets in footer */
+/* footer widgets */
 
 .footer-title {
 	display: none;
@@ -1046,18 +1046,20 @@ footer.entry-meta {
 }
 
 
-.weather .twtr-widget, .weather .twtr-doc {
-	margin-top: 0;
+/* footer weather widget */
+
+#interoccupy { 
+	.twtr-widget, .twtr-doc {
+		margin-top: 0;
+	}
+	.twtr-tweet-wrap {
+		padding: 15px 0px!important;
+	}
+	.twtr-fav, .twtr-rt, .twtr-reply {
+		display: none;
+	}
 }
 
-.weather .twtr-tweet-wrap {
-	padding: 15px 0px!important;
-}
-
-.weather .twtr-fav, .weather .twtr-rt, .weather .twtr-reply {
-	display: none;
-	
-}
 
 
 /* home page all news feed */
@@ -1235,7 +1237,7 @@ footer.entry-meta {
 	padding: 10px 25px 0;
 	li {
 		.inlineBlock;
-		margin: 0 -4px 0 0;
+		margin: 0 -4px 1px 0;
 		border-right: 1px dotted @white;
 	}
 	a {

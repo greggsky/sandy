@@ -162,9 +162,9 @@ footer.entry-meta{color:#aaaaaa;font-size:12px;}
 .twitter-timeline{border-top:1px solid #CCC;font-size:11px;padding:8px 10px 10px;display:block;color:#0085bf;}
 .footer-title{display:none;}
 .footer-widget-title{margin:0;line-height:1em;}
-.weather .twtr-widget,.weather .twtr-doc{margin-top:0;}
-.weather .twtr-tweet-wrap{padding:15px 0px!important;}
-.weather .twtr-fav,.weather .twtr-rt,.weather .twtr-reply{display:none;}
+#interoccupy .twtr-widget,#interoccupy .twtr-doc{margin-top:0;}
+#interoccupy .twtr-tweet-wrap{padding:15px 0px!important;}
+#interoccupy .twtr-fav,#interoccupy .twtr-rt,#interoccupy .twtr-reply{display:none;}
 .smm-item{border-bottom:1px solid #CCC;max-height:160px;overflow:hidden;overflow-y:scroll;padding:5px 50px 0!important;background-position:13px 12px!important;}.smm-item p{font-size:14px;}
 .smm-item .entry-meta{font-size:12px;font-style:italic;}.smm-item .entry-meta a{color:#999;}
 #interoccupy{clear:both;border-top:1px solid #bbbbbb;margin-top:25px;}#interoccupy p{font-size:14px;margin:0 0 1em;}
@@ -189,7 +189,7 @@ footer.entry-meta{color:#aaaaaa;font-size:12px;}
 .keyFood{margin-right:20px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;line-height:1.2em;color:#ffcd67;}
 .volunteerPage .main,.mapsPage .main{display:inline;float:left;width:97.91666666666666%;margin:0 1.0416666666666665%;padding:0;}
 .basics{background:#ffffff;padding:25px;}
-.options-container{list-style:none;background:#eeeeee;margin:0!important;padding:10px 25px 0;}.options-container li{display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;margin:0 -4px 0 0;border-right:1px dotted #ffffff;}
+.options-container{list-style:none;background:#eeeeee;margin:0!important;padding:10px 25px 0;}.options-container li{display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;margin:0 -4px 1px 0;border-right:1px dotted #ffffff;}
 .options-container a{display:block;padding:4px 11px;text-transform:uppercase;letter-spacing:1px;line-height:1.2em;font-size:12px;background:#0085bf;color:#ffffff;}
 .options-container a:hover{background:#555555;color:#ffffff;}
 .options-container .filter-class.selected{background-color:#222222;color:#ffffff;}
