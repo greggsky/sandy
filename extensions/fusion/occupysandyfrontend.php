@@ -1,6 +1,42 @@
 <?php
+// Required classes.
+
 require_once('occupysandycard.class.php');
 
+class OccupySandyFrontend {
+	function __construct () {
+		add_shortcode('location-cards', array(&$this, 'location_cards'));
+	} /* OccupySandyFrontend */
+	
+	function location_cards ($atts, $content) {
+		global $wpdb;
+		
+		$atts = shortcode_atts(array(
+			"for" => null,
+			"type" => null,
+		), $atts);
+		
+		$mm = array();
+		if (!is_null($atts['for'])) :
+			$mm['Region'] = $atts['for'];
+		endif;
+		if (!is_null($atts['type'])) :
+			$mm['type'] = $atts['type'];
+		endif;
+		
+		ob_start();
+		the_occupy_sandy_cards(array(
+		"matches" => $mm,
+		"template-class" => 'inline',
+		));
+		$html = ob_get_clean();
+
+		return $html;
+	}
+}
+$GLOBALS['OccupySandyFrontend'] = new OccupySandyFrontend;
+
+// Template functions.
 function get_occupy_sandy_cards ($params = array()) {
 	$params = wp_parse_args($params, array(
 	"raw" => true,
@@ -12,21 +48,41 @@ function get_occupy_sandy_cards ($params = array()) {
 		$ret = $data;
 	else :
 		$ret = array();
-		foreach ($data->rows as $datum) :
-			$ret[] = new OccupySandyCard($datum, $data->columns);
-		endforeach;
+		if (!is_null($data->rows)) :
+			foreach ($data->rows as $datum) :
+				$ret[] = new OccupySandyCard($datum, $data->columns);
+			endforeach;
+		endif;
 	endif;
 	return $ret;
 }
 
 function the_occupy_sandy_cards ($params = array()) {
 	global $OccupySandyCard;
-
+	global $wpdb;
+	
+	$params = wp_parse_args($params, array(
+	"matches" => null,
+	"template-class" => null,
+	));
+	
+	if (is_array($params['matches'])) :
+		$whereClauses = array();
+		foreach ($params['matches'] as $col => $value):
+			$whereClauses[] = "'".$col."' = '".$wpdb->escape($value)."'";
+		endforeach;
+		$params['where'] = implode(' AND ', $whereClauses);
+	endif;                
+	
 	$cards = get_occupy_sandy_cards($params);
 	foreach ($cards as $card) :
 		$OccupySandyCard = $card;
 
-		$primeClass = reset(explode(" ", $card->get_card_class()));
+		if (is_null($params['template-class'])) :
+			$primeClass = reset(explode(" ", $card->get_card_class()));
+		else :
+			$primeClass = $params['template-class'];
+		endif;
 		get_template_part('card', $primeClass);
 	endforeach;
 }
