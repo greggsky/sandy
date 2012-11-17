@@ -3,8 +3,7 @@ class OccupySandyCard {
 	private $row = array();
 	private $cols = array();
 	private $cardTitle;
-	private $cardClasses;
-	private $regionClasses;
+	private $htmlClasses;
 
 	function __construct ($row = array(), $cols = array()) {
 		$this->row = $row;
@@ -12,21 +11,21 @@ class OccupySandyCard {
 
 		$this->parseData();
 
-		$this->cardClasses = apply_filters('occupysandy_card_classes', $this->cardClasses, $this);
+		$this->htmlClasses = apply_filters('occupysandy_card_classes', $this->htmlClasses, $this);
 		$this->cardTitle = apply_filters('occupysandy_card_title', $this->cardTitle, $this);
 	}
 
 	function parseData () {
-		$this->cardClass = array();
+		$this->htmlClasses = array('type' => array(), 'region' => array(), 'state' => array());
 		$this->cardTitle = '';
 
 		if ($this->is_distro_center()) :
-			$this->cardClasses[] = 'hub';
+			$this->htmlClasses['type'][] = 'hub';
 			$this->cardTitle = 'Main Distribution Center';
 		endif;
 		
 		if ($this->is_drop_off()) :
-			$this->cardClasses[] = 'dropoff';
+			$this->htmlClasses['type'][] = 'dropoff';
 
 			// We may have already gotten a title, if this is a distro center.
 			if (strlen($this->cardTitle) < 1) :
@@ -35,7 +34,7 @@ class OccupySandyCard {
 		endif;
 
 		if ($this->is_volunteer()) :
-			$this->cardClasses[] = 'volunteer';
+			$this->htmlClasses['type'][] = 'volunteer';
 			
 			// We may have already gotten a title, if this is a distro center or a drop-off+volunteer location
 			if (strlen($this->cardTitle) < 1) :
@@ -51,20 +50,40 @@ class OccupySandyCard {
 			endif;
 		endif;
 
-		if (count($this->cardClasses) == 0) :
-			$this->cardClasses[] = 'unknown';
+		if (count($this->htmlClasses['type']) == 0) :
+			$this->htmlClasses['type'][] = 'unknown';
 		endif;
 
 		
-		$this->regionClasses = array();
+		$this->htmlClasses['region'] = array();
 		$region = $this->field('Region');
 		if (strlen($region) > 0) :
-			$this->regionClasses[$region] = 'region-'.sanitize_title($region);
+			$this->htmlClasses['region'][$region] = 'region-'.sanitize_title($region);
 		else :
-			$this->regionClasses['Other'] = 'region-other';
+			$this->htmlClasses['region']['Other'] = 'region-other';
+		endif;
+
+		$state = $this->get_state();
+		if (strlen($state) > 0) :
+			$this->htmlClasses['state'][$state] = 'state-'.strtoupper(sanitize_title($state));
+		else :
+			$this->htmlClasses['state']['NY'] = 'state-NY';
 		endif;
 	}
 
+	function normalize_state ($state) {
+		$map = array(
+		"new-york" => 'NY',
+		'new-jersey' => 'NJ',
+		'pennsylvania' => 'PA',
+		);
+		
+		// Normalize key.
+		$key = sanitize_title(preg_replace('/\s+/', ' ', $state));
+
+		return (isset($map[$key]) ? $map[$key] : $state);
+	}
+	
 	function columns () {
 		return $this->cols;
 	}
@@ -114,7 +133,7 @@ class OccupySandyCard {
 		global $os_regionToState;
 
 		$ret = $this->field('State');
-		if (is_null($ret)) :
+		if (is_null($ret) or (strlen($ret) == 0)) :
 			$region = $this->field('Region');
 			if (preg_match('/\b(New Jersey|NJ)\b/i', $region)) :
 				$ret = 'NJ';
@@ -126,12 +145,15 @@ class OccupySandyCard {
 				endif;
 			endif;
 		endif;
-		return $ret;
+		
+		// Normalize state names
+		return $this->normalize_state($ret);
 	}
 
-	function get_type_classes () { return $this->cardClasses; }
-	function get_region_classes () { return $this->regionClasses; }
-	function get_card_class () { return implode(" ", array_merge($this->get_type_classes(), $this->get_region_classes())); }
+	function get_type_classes () { return $this->htmlClasses['type']; }
+	function get_region_classes () { return $this->htmlClasses['region']; }
+	function get_state_classes () { return $this->htmlClasses['state']; }
+	function get_card_class () { return implode(" ", array_merge($this->get_type_classes(), $this->get_region_classes(), $this->get_state_classes())); }
 	function get_card_heading () { return $this->cardTitle; }
 	function get_title () { return $this->field('Title'); }
 	function get_address () { return $this->field('Address'); }
