@@ -137,16 +137,22 @@ $filters['region'] = array(
 // Here is a way to clean up label text that you do not like.
 $filterMap['type']['text'] = array('unknown' => 'Other');
 
-// Force the unknown / other settings to bottom.
+// Sort these by # of cards, with blanks sorted down to the end.
 if (isset($filters['state']['values'][''])) :
 	$filters['state']['values'][''] = 0;
 endif;
-$filters['type']['values']['unknown'] = 0;
-$filters['region']['values']['Other/region-other'] = 0;
-
 arsort($filters['state']['values']);
+
+$filters['type']['values']['unknown'] = 0;
 arsort($filters['type']['values']);
-arsort($filters['region']['values']);
+
+// Sort A-Z, with "Other" forced down to the end.
+uksort($filters['region']['values'], function ($left, $right) {
+		// Force "Other" to end of alpha order
+		$a = (('region-other'==$left) ? '{|}' : $left);
+		$b = (('region-other'==$right) ? '{|}' : $right);
+		return strcmp($a, $b);
+});
 
 //////////////////////////////////////////////////////
 // HEADER: This kind of page requires some scripts. //
