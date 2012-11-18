@@ -266,7 +266,6 @@ blockquote {
 	font-size: 18px; 
 	font-style: normal; 
 	color: @black; 
-	background: @white;
 	margin-top: 1.5em;
 	padding: 25px 50px;
 	border-top: 1px solid #BBB;
@@ -297,10 +296,6 @@ blockquote {
 	}
 }
 
-.home blockquote {
-	border-bottom: 0;
-	margin-bottom: .5em;
-}
 
 
 cite {
@@ -961,6 +956,7 @@ footer.entry-meta {
 	input[type="text"] {
 		margin: 0;
 		width: 100%;
+		padding: 1px 6px;
 	}
 }
 
@@ -1080,13 +1076,22 @@ footer.entry-meta {
 /* footer weather widget */
 
 #interoccupy { 
-	.twtr-widget, .twtr-doc {
+	.twtr-widget, 
+	.twtr-doc {
 		margin-top: 0;
 	}
 	.twtr-tweet-wrap {
-		padding: 15px 0px!important;
+		padding: 0!important;
 	}
-	.twtr-fav, .twtr-rt, .twtr-reply {
+	.twtr-widget .twtr-tweet {
+		border: 0;
+	}
+	.twtr-reference-tweet + .twtr-tweet {
+		display: block;
+	}
+	.twtr-fav, 
+	.twtr-rt, 
+	.twtr-reply {
 		display: none;
 	}
 }
@@ -1131,7 +1136,7 @@ footer.entry-meta {
 	margin-top: 25px;
 	p {
 		font-size: 14px;
-		margin: 0 0 1em;
+		margin: 0 0 .9em;
 	}
 	.socialgram {
 		font-size: 30px;
@@ -1310,6 +1315,14 @@ footer.entry-meta {
 	width: 100%;
 }
 
+.page-child .container {
+	padding: 25px 0 0 5px;
+	margin-bottom: -25px;
+	width: auto;
+	margin: 0 -30px;
+}
+
+
 .card {
 	float: left;
 	width: 300px;
@@ -1318,7 +1331,8 @@ footer.entry-meta {
 	background: @white;
 	box-shadow: 3px 3px 25px -10px black; /*MP*/
 	h1, h2, h5, p {
-		margin-bottom: 10px;
+		margin-top: 0!important;
+		margin-bottom: 10px!important;
 	}
 	span {
 		.sans;
@@ -1336,12 +1350,16 @@ footer.entry-meta {
 	}
 }
 
+.page-child .card {
+	width: 250px;
+}
+
 .cardType {
 	.caps;
 	font-weight: 700;
 	color: @white;
 	padding: 0 15px;
-	margin: 0 -15px;
+	margin: 0 -15px!important;
 	height: 32px;
 	line-height: 32px;
 	background-repeat: no-repeat;
@@ -1351,7 +1369,7 @@ footer.entry-meta {
 	.condensed;
 	line-height: 1.1em;
 	padding-top: 4px;
-	margin-top: 10px;
+	margin-top: 10px!important;
 }
 .cardAddress {
 	.caps;
