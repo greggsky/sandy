@@ -618,9 +618,15 @@ hr {
 	margin-top: 35px;
 	background: @white;
 	border-right: 1px solid @grayE;
+	p {
+		font-size: 14px;
+	}
 	.button {
 		margin-bottom: 10px;
 		width: 100%;
+	}
+	.button.form-submit {
+		margin-bottom: 0;
 	}
 	.stateface-nj {
 		font-size: 40px;
@@ -753,7 +759,9 @@ hr {
 		-webkit-transition-property: background-color;
 		-webkit-transition-duration: 100ms;	
 	}
-	a:hover, .current-menu-item a {
+	a:hover, 
+	.current-menu-item a, 
+	.current-page-ancestor a:hover {
 		background: @yellow;
 	}
 	.current-page-ancestor a {
@@ -937,7 +945,7 @@ footer.entry-meta {
 
 .email-form {
 	border-top: 1px dotted @grayB;
-	padding: 5px;
+	padding: 0 5px;
 	margin-top: 25px;
 	text-align: left;
 	label {
