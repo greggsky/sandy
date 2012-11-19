@@ -10,10 +10,13 @@ class OccupySandyFrontend {
 	
 	function location_cards ($atts, $content) {
 		global $wpdb;
-		
+
 		$atts = shortcode_atts(array(
 			"for" => null,
 			"type" => null,
+			"with" => null,
+			"of" => null,
+			"using" => 'inline',
 		), $atts);
 		
 		$mm = array();
@@ -23,11 +26,25 @@ class OccupySandyFrontend {
 		if (!is_null($atts['type'])) :
 			$mm['type'] = $atts['type'];
 		endif;
+		if (!is_null($atts['with'])) :
+			if (!is_null($atts['of'])) :
+				$col = $atts['with'];
+				
+				// Normalize & quote if necessary
+				if (preg_match('/[^A-Za-z0-9]/', $col)) :
+					$col = $wpdb->escape($col);
+					$col = "'${col}'";
+				endif;
+				
+				$values = explode("/", $atts['of']);
+				$mm[$col] = $values;
+			endif;
+		endif;
 		
 		ob_start();
 		the_occupy_sandy_cards(array(
 		"matches" => $mm,
-		"template-class" => 'inline',
+		"template-class" => $atts['using'],
 		));
 		$html = ob_get_clean();
 
@@ -68,8 +85,20 @@ function the_occupy_sandy_cards ($params = array()) {
 	
 	if (is_array($params['matches'])) :
 		$whereClauses = array();
-		foreach ($params['matches'] as $col => $value):
-			$whereClauses[] = "'".$col."' = '".$wpdb->escape($value)."'";
+		foreach ($params['matches'] as $col => $value) :
+			if (is_array($value)) :
+				$operator = 'IN';
+				$operand = "(";
+				if (count($value) > 0) :
+					$operand .= "'" . implode("', '", array_map(array($wpdb, 'escape'), $value)) . "'";
+				endif;
+				$operand .= ")";
+			else :
+				$operator = '=';
+				$operand = "'".$wpdb->escape($value)."'";
+			endif;
+			
+			$whereClauses[] = "$col $operator $operand";
 		endforeach;
 		$params['where'] = implode(' AND ', $whereClauses);
 	endif;                
