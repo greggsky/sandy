@@ -1,6 +1,16 @@
 <?php
 	// Prepare data for use in template.
 	$card = get_the_occupy_sandy_card();
+
+if (is_wp_error($card)) : 
+?>
+<div class="card error <?php print $card->get_error_code(); ?>">
+<h5 class="cardType">Back-End Error</h5>
+<p><?php print $card->get_error_message(); ?></p>
+</div>
+
+<?php
+else :
 	$classes = array('card', $card->get_card_class());
 	$state = $card->get_state();
 	$address = $card->get_address();
@@ -64,4 +74,6 @@ endif; ?></h5>
 <?php endif; ?>
 
 </div>
+<?php
+endif;
 

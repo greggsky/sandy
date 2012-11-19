@@ -104,6 +104,10 @@ function the_occupy_sandy_cards ($params = array()) {
 	endif;                
 	
 	$cards = get_occupy_sandy_cards($params);
+	if (is_wp_error($cards)) :
+		$cards = array($cards);
+	endif;
+
 	foreach ($cards as $card) :
 		$OccupySandyCard = $card;
 
