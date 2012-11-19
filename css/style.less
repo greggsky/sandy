@@ -375,12 +375,13 @@ button, .button,
 	background: @grayA;
 	color: @grayF;
 	border: 0;
-	text-decoration: none; 
+	text-decoration: none;
+	text-shadow: none; 
 	cursor: pointer;
 	-webkit-transition-property: background-color, color;
 	-webkit-transition-duration: 100ms;	
 	&:hover {
-		background: @grayC;
+		background: @grayB;
 		color: @white; 
 	}
 }
@@ -398,6 +399,10 @@ button, .button,
 	width: auto!important;
 	padding: 8px 12px;
 	font-size: 12px;
+	&:hover {
+		background: @grayB;
+		color: @white; 
+	}
 }
 
 .edit-link {
@@ -552,10 +557,10 @@ input#submit, input.form-submit {
 
 
 hr {
-	background-color: #ccc;
+	background-color: #DDD;
 	border: 0;
 	height: 1px;
-	margin-bottom: 1.4em;
+	margin: 3em 0 1em;
 }
 
 
@@ -863,7 +868,18 @@ footer.entry-meta {
 
 /* blog */
 
-.blog, .single-post {
+
+.blog, 
+.single {
+	#primary {
+		padding-top: 30px;		
+	}
+	.entry-content {
+		margin: 1.5em 0;
+		p {
+			margin-bottom: 1em;
+		}
+	}
 	.entry-title {
 		line-height: 1.1em;
 		margin-bottom: 0;
@@ -883,12 +899,25 @@ footer.entry-meta {
 	}
 }
 
-.single-post .entry-content {
-	margin: 1.5em 0;
-	p {
-		margin-bottom: 1em;
+#content .social-commentlist {
+	margin: 0 5px!important;
+}
+
+#social .social-fn {
+	text-align: left;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#social input#submit {
+	.btnSmall;
+	text-shadow: none;
+	height: auto;
+	&:hover {
+		background: @grayB;
 	}
 }
+
 
 /* community pages */
 
@@ -1058,6 +1087,21 @@ footer.entry-meta {
 	padding: 8px 10px 10px;
 	display: block;
 	color: @blue;
+}
+
+/* subpage twitter widget */
+
+.twitter-local {
+	width: 330px;
+	float: right;
+	margin-left: 20px;
+	.ui-tabs-panel {
+		margin-top: -1.5em;
+	}
+}
+
+.page-child .twtr-widget .twtr-tweet-text p {
+	font-size: 14px!important;
 }
 
 
@@ -1317,9 +1361,8 @@ footer.entry-meta {
 
 .page-child .container {
 	padding: 25px 0 0 5px;
-	margin-bottom: -25px;
 	width: auto;
-	margin: 0 -30px;
+	margin: 0 -30px -65px;
 }
 
 
