@@ -86,16 +86,22 @@ function the_occupy_sandy_cards ($params = array()) {
 	if (is_array($params['matches'])) :
 		$whereClauses = array();
 		foreach ($params['matches'] as $col => $value) :
-			if (is_array($value)) :
+			if (!is_array($value)) :
+				$value = array($value);
+			endif;
+			
+			if (count($value) > 1) :
 				$operator = 'IN';
 				$operand = "(";
 				if (count($value) > 0) :
-					$operand .= "'" . implode("', '", array_map(array($wpdb, 'escape'), $value)) . "'";
+				$operand .= "'" . implode("', '", array_map(function ($v) {
+						return $GLOBALS['wpdb']->escape(trim($v));
+				}, $value)) . "'";
 				endif;
 				$operand .= ")";
 			else :
 				$operator = '=';
-				$operand = "'".$wpdb->escape($value)."'";
+				$operand = "'".$wpdb->escape(reset($value))."'";
 			endif;
 			
 			$whereClauses[] = "$col $operator $operand";
