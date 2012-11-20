@@ -1115,7 +1115,7 @@ footer.entry-meta {
 .twitter-local {
 	width: 330px;
 	float: right;
-	margin-left: 20px;
+	margin: 20px 0 20px 20px;
 	.ui-tabs-panel {
 		margin-top: -1.5em;
 	}
@@ -1534,28 +1534,33 @@ footer.entry-meta {
 	padding: 0;
 	width: auto!important;
 	float: none;
+	span {
+		display: block;
+		margin: 2em 0 .5em;
+		font-weight: bold;
+		font-size: 14px;
+	}
 	.cardType {
 		margin: 20px 0 0!important;
 		padding: 0;
 		width: auto;
 		background: white!important;
 		color: @red;
-		font-size: 15px;
+		font-size: 16px;
 	}
-	span {
-		margin: 2em 0 .5em;
-		font-weight: bold;
+	.cardAddress {
 		font-size: 14px;
 	}
-	.cardStatus span, 
-	.cardDetails span {
-		display: block;
+	.cardUpdated {
+		font-size: 15px;
+		margin: 1.5em 0 -.5em!important;
 	}
 	.cardStatus, .cardDetails {
 		font-size: 16px;
 	}
 	.cardContact, .cardTimes {
 		font-weight: normal;
+		font-size: 16px;
 	}
 }
 
