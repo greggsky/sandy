@@ -1526,18 +1526,23 @@ footer.entry-meta {
 .card.mini {
 	.clear-shadow;
 	border: 1px solid #DDD;
-	padding: 15px 20px;
-	.cardLink {
+	&:hover {
+		border-color: @red;
+	}
+	.aCard {
+		display: block;
+		padding: 15px 20px;
+	}
+	.pictogram {
 		float: right;
+		text-decoration: none;
+		font-size: 40px;
+		color: @red;
 	}
 	.cardStatus {
 		max-height: 90px;
 		overflow: hidden;
-	}
-	.pictogram {
-		text-decoration: none;
-		font-size: 40px;
-		color: @red;
+		margin-bottom: 5px!important;
 	}
 }
 

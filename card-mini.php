@@ -41,16 +41,19 @@ else :
 ?>
 <div class="<?php print implode(" ", $classes); ?> mini">
 
-<?php if (strlen($link) > 0) : ?>
-<h5 class="cardLink"><a href="<?php print $link; ?>" class="pictogram">➦</a></h5>
-<?php endif; ?>
-
-<h2 class="cardName"><?php print $card->get_title(); ?></h2>
-
-<?php if (strlen($status) > 0) : ?>
-<p class="cardStatus"><?php print $status; ?></p>
-<?php endif; ?>
-
+	<a href="<?php print $link; ?>" class="aCard">
+	
+		<?php if (strlen($link) > 0) : ?>
+		<h5 class="cardLink pictogram">➦</h5>
+		<?php endif; ?>
+		
+		<h2 class="cardName"><?php print $card->get_title(); ?></h2>
+		
+		<?php if (strlen($status) > 0) : ?>
+		<p class="cardStatus"><?php print $status; ?></p>
+		<?php endif; ?>
+	
+	</a>
 
 </div>
 <?php
