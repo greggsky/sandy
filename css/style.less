@@ -588,25 +588,7 @@ hr {
 	padding: 20px 30px 40px;
 }
 
-.home {
-	#primary1 {
-		padding-top: 0;
-	}
-	.leader {
-		margin: 0;
-		line-height: 1em;
-	}
-	.follower {
-		margin-top: .25em;
-	}
-	.callout {
-		font-size: 15px; 
-		text-transform: uppercase; 
-		font-weight:bold; 
-		letter-spacing: 1px; 
-		margin: 25px 0 10px;
-	}
-}
+
 
 .layout-1c {
 	#primary {
@@ -1513,6 +1495,48 @@ footer.entry-meta {
 }
 .tile-always-display .cardType {
  background: @yellow;
+}
+
+
+/* cards on the home page */
+
+.card.mini {
+	.clear-shadow;
+	border: 1px solid #DDD;
+	padding: 15px 20px;
+	.cardLink {
+		float: right;
+	}
+	.cardStatus {
+		max-height: 90px;
+		overflow: hidden;
+	}
+	
+}
+
+.home {
+	.leader {
+		margin-top: -20px;
+		margin-bottom: 0;
+		line-height: 1em;
+	}
+	.follower {
+		margin-top: .25em;
+	}
+	.callout {
+		font-size: 15px; 
+		text-transform: uppercase; 
+		font-weight:bold; 
+		letter-spacing: 1px; 
+		margin: 25px 0 10px;
+	}
+	.card {
+		width: 49%;
+		margin-left: 2%;
+	}
+	.card:first-child {
+		margin: 0;
+	}
 }
 
 
