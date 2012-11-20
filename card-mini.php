@@ -52,6 +52,10 @@ else :
 		<?php if (strlen($status) > 0) : ?>
 		<p class="cardStatus"><?php print $status; ?></p>
 		<?php endif; ?>
+
+		<?php if (strlen($updated) > 0) : ?>
+		<h5 class="cardUpdated">Updated <?php print $updated; ?></h5>
+		<?php endif; ?>
 	
 	</a>
 

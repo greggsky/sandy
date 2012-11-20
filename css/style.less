@@ -1113,7 +1113,7 @@ footer.entry-meta {
 /* subpage twitter widget */
 
 .twitter-local {
-	width: 330px;
+	width: 320px;
 	float: right;
 	margin: 20px 0 20px 20px;
 	.ui-tabs-panel {
@@ -1126,11 +1126,20 @@ footer.entry-meta {
 	.sws-tabs.ui-tabs .ui-tabs-nav li a {
 		padding: 0 12px!important;
 	}
+	.twtr-widget.twtr-widget-profile .twtr-tweet-wrap {
+		padding: 12px 10px!important;
+	}
+	.twtr-widget.twtr-widget-profile .twtr-tweet-text p {
+		font-size: 14px!important;
+		line-height: 1.4em!important;
+	}
+	.twtr-fav, 
+	.twtr-rt, 
+	.twtr-reply {
+		display: none;
+	}
 }
 
-.page-child .twtr-widget .twtr-tweet-text p {
-	font-size: 14px!important;
-}
 
 
 /* footer widgets */
@@ -1590,7 +1599,12 @@ footer.entry-meta {
 	.cardStatus {
 		max-height: 90px;
 		overflow: hidden;
-		margin-bottom: 5px!important;
+		margin-bottom: 0!important;
+	}
+	.cardUpdated {
+		margin-top: 0;
+		color: #999;
+		font-size: 13px;
 	}
 	span {
 		display: none;
