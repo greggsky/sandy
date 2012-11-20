@@ -50,7 +50,7 @@ else :
 		<h2 class="cardName"><?php print $card->get_title(); ?></h2>
 		
 		<?php if (strlen($status) > 0) : ?>
-		<p class="cardStatus"><?php print $status; ?></p>
+		<p class="cardStatus"><?php print $status; ?>&hellip;</p>
 		<?php endif; ?>
 
 		<?php if (strlen($updated) > 0) : ?>
