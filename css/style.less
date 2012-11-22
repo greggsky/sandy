@@ -259,7 +259,7 @@ h5 {font-size: 13px;}
 h6 {font-size: 12px;}
 p, label, li  {font-size: 15px;}
 
-.small {font-size: 12px;}
+.small, small {font-size: 12px;}
 .caps {text-transform: uppercase; letter-spacing: 1px; line-height: 1.2em;}
 .alertText, .alertText a {color: @red;}
 
@@ -800,7 +800,8 @@ hr {
 			width: 100%;
 			margin: 0;
 			border: 0;
-			border-bottom: 1px dotted @grayE;			
+			border-bottom: 1px dotted @grayE;		
+			font-weight: bold;	
 		}
 		li:last-child {
 			border: 0;
@@ -1298,6 +1299,21 @@ footer.entry-meta {
 
 /* map */
 
+.mapKey {
+	.menu;
+	margin: 25px 0 0!important;
+	li {
+		font-size: 13px;
+		margin-right: 15px;
+		height: 30px;
+		overflow: hidden;
+	}
+	img {
+		float: left;
+		margin-right: 4px;
+	}
+}
+
 .otherMaps {
 	.column(2);
 	float: right;
@@ -1334,7 +1350,7 @@ footer.entry-meta {
 }
 .keyFood {
 	.key;
-	color: @yellow;
+	color: @purple;
 }
 
 
