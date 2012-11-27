@@ -442,7 +442,6 @@ button, .button,
 
 
 
-
 /******* LISTS *******/
 
 
@@ -886,6 +885,13 @@ footer.entry-meta {
 	color: @grayC;
 	.small;
 }
+
+
+/* bug fix to hide duplicate gallery of images */
+.wpuf-attachments {
+	display: none;
+}
+
 
 
 /* blog */
@@ -1640,10 +1646,8 @@ footer.entry-meta {
 	.card:first-child {
 		margin: 0;
 	}
-	.state-PA {
-		display: none;
-	}
 }
+
 
 /* Isotope */
 
