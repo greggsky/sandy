@@ -1,4 +1,6 @@
 <?php
+require_once('sahanageofeature.class.php');
+
 class SahanaGeoJSONP {
 	private $text;
 	private $data;
@@ -72,6 +74,40 @@ class SahanaGeoJSONP {
 
 		return $feat;
 	} /* SahanaGeoJSONP::get_features () */
+
+	function data ($params = array()) {
+		$params = wp_parse_args($params, array(
+		"cols" => '*',
+		"limit" => null,
+		"offset" => null,
+		"table" => null,
+		"where" => null,
+		"raw" => false,
+		"fresh" => false,
+		));
+
+		$data = new stdClass;
+
+		$ff = $this->get_features();
+		if (is_array($ff)) :
+			if (count($ff) > 0) :
+				$cols = array();
+				$data->kind = 'sahanajsonp#sqlresponse';
+				foreach ($ff as $f) :
+					$feat = new SahanaGeoFeature($f);
+					$data->rows[] = $feat->to_table($cols);
+				endforeach;
+				
+				$data->columns = array_flip($cols);
+				ksort($data->columns);
+			endif;
+		else :
+			// FIXME: Maybe pass back a WP_Error object?
+			$data = NULL;
+		endif;
+
+		return $data;
+	} /* SahanaGeoJSONP::data () */
 
 } /* class SahanaGeoJSONP */
 
