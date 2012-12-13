@@ -1,6 +1,13 @@
 <?php
 require_once('sahanageofeature.class.php');
 
+	class SahanaExpectedFeature extends Exception {
+		function __construct ($f) {
+			// FIXME: This sucks.
+			parent::__construct('Invalid Feature Object: '.json_encode($f));
+		}
+	}
+
 class SahanaGeoJSONP {
 	private $text;
 	private $data;
@@ -95,11 +102,18 @@ class SahanaGeoJSONP {
 				$data->kind = 'sahanajsonp#sqlresponse';
 				foreach ($ff as $f) :
 					$feat = new SahanaGeoFeature($f);
-					$data->rows[] = $feat->to_table($cols);
+					$row = $feat->to_table($cols);
+					if (is_array($row)) :
+						ksort($row);
+						$data->rows[] = $row;
+					else :
+						throw new SahanaExpectedFeature($f);
+					endif;
 				endforeach;
 				
 				$data->columns = array_flip($cols);
 				ksort($data->columns);
+
 			endif;
 		else :
 			// FIXME: Maybe pass back a WP_Error object?
