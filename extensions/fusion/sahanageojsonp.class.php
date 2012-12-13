@@ -1,7 +1,7 @@
 <?php
 class SahanaGeoJSONP {
-	var $text;
-	var $data;
+	private $text;
+	private $data;
 
 	function __construct ($data) {
 		if (is_string($data)) : // Just supplied some JSON or JSONP in a string
@@ -47,6 +47,31 @@ class SahanaGeoJSONP {
 
 		$this->data = $data;
 	} /* SahanaGeoJSONP::parse () */
+
+	function is_ok () {
+		return !is_null($this->data);
+	} /* SahanaGeoJSONP::is_ok () */
+
+	function is_collection () {
+		return (
+			$this->is_ok()
+			and is_object($this->data)
+			and isset($this->data->type)
+			and ('FeatureCollection'==$this->data->type)
+			and isset($this->data->features)
+			and is_array($this->data->features)
+		);
+	} /* SahanaGeoJSONP::is_collection () */
+
+	function get_features () {
+		$feat = null;
+
+		if ($this->is_collection()) :
+			$feat = $this->data->features;
+		endif;
+
+		return $feat;
+	} /* SahanaGeoJSONP::get_features () */
 
 } /* class SahanaGeoJSONP */
 
