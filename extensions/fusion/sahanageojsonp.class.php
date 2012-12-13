@@ -120,6 +120,16 @@ class SahanaGeoJSONP {
 			$data = NULL;
 		endif;
 
+		if (is_object($data)) :
+			// Apply limit / offset clause
+			if (!is_null($params['offset']) or !is_null($params['limit'])) :
+				$offset = (is_null($params['offset']) ? 0 : $params['offset']);
+				$limit = (is_null($params['limit']) ? count($data->rows) - $offset : $params['limit']);
+
+				$data->rows = array_slice($data->rows, $offset, $limit);
+			endif;
+		endif;
+
 		return $data;
 	} /* SahanaGeoJSONP::data () */
 
