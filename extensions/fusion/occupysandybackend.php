@@ -1,5 +1,6 @@
 <?php
 require_once('fusiontable.class.php');
+require_once('sahanageojsonp.class.php');
 
 class OccupySandyBackend {
 	var $ft;
