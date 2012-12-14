@@ -10,10 +10,13 @@ class OccupySandyFrontend {
 	
 	function location_cards ($atts, $content) {
 		global $wpdb;
-		
+
 		$atts = shortcode_atts(array(
 			"for" => null,
 			"type" => null,
+			"with" => null,
+			"of" => null,
+			"using" => 'inline',
 		), $atts);
 		
 		$mm = array();
@@ -23,11 +26,25 @@ class OccupySandyFrontend {
 		if (!is_null($atts['type'])) :
 			$mm['type'] = $atts['type'];
 		endif;
+		if (!is_null($atts['with'])) :
+			if (!is_null($atts['of'])) :
+				$col = $atts['with'];
+				
+				// Normalize & quote if necessary
+				if (preg_match('/[^A-Za-z0-9]/', $col)) :
+					$col = $wpdb->escape($col);
+					$col = "'${col}'";
+				endif;
+				
+				$values = explode("/", $atts['of']);
+				$mm[$col] = $values;
+			endif;
+		endif;
 		
 		ob_start();
 		the_occupy_sandy_cards(array(
 		"matches" => $mm,
-		"template-class" => 'inline',
+		"template-class" => $atts['using'],
 		));
 		$html = ob_get_clean();
 
@@ -65,16 +82,12 @@ function the_occupy_sandy_cards ($params = array()) {
 	"matches" => null,
 	"template-class" => null,
 	));
-	
-	if (is_array($params['matches'])) :
-		$whereClauses = array();
-		foreach ($params['matches'] as $col => $value):
-			$whereClauses[] = "'".$col."' = '".$wpdb->escape($value)."'";
-		endforeach;
-		$params['where'] = implode(' AND ', $whereClauses);
-	endif;                
-	
+
 	$cards = get_occupy_sandy_cards($params);
+	if (is_wp_error($cards)) :
+		$cards = array($cards);
+	endif;
+
 	foreach ($cards as $card) :
 		$OccupySandyCard = $card;
 
@@ -118,6 +131,35 @@ function get_occupy_sandy_possible_values_for ($fieldName, $params = array()) {
 			endif;
 			if (!isset($ret[$i])) : $ret[$i] = 0; endif;
 			$ret[$i] += 1;
+		endforeach;
+	endforeach;
+	return $ret;
+}
+
+function get_mapped_occupy_sandy_possible_values_for ($from, $to, $params = array(), $cards = null) {
+	if (is_null($cards)) :
+		$cards = get_occupy_sandy_cards($params);
+	endif;
+	
+	$ret = array();
+	foreach ($cards as $card) :
+		$fromValue = $card->get_values($from);
+		
+		foreach ($fromValue as $idx => $v) :
+			$i = urlencode($v);
+
+			if (!isset($ret[$i])) : $ret[$i] = array(); endif;
+
+			if (!is_numeric($idx)) :
+				$ret[$i]['label'] = $idx;
+			endif;
+
+			if (!isset($ret[$i]['values'])) : $ret[$i]['values'] = array(); endif;
+			if (!isset($ret[$i]['N'])) : $ret[$i]['N'] = 0; endif;
+			
+			$toValues = $card->get_values($to);
+			$ret[$i]['values'] = array_merge($ret[$i]['values'], $toValues);
+			$ret[$i]['N'] += 1;
 		endforeach;
 	endforeach;
 	return $ret;

@@ -1,25 +1,28 @@
 <?php
-define('FUSIONTABLE_CACHE_WINDOW', 60); // seconds
+require_once('occupysandydatasource.class.php');
 
-class FusionTable {
+class FusionTable extends OccupySandyDataSource {
 	private $apikey;
 	private $defaultTable;
 	private $apiQs = 0;
+	private $cache;
 
 	function __construct ($apikey, $defaultTable = NULL) {
 		$this->apikey = $apikey;
 		$this->defaultTable = $defaultTable;
 
-		add_action('shutdown', array(&$this, 'shutdown'));
-
-		$this->queryResults = get_option('fusiontables_querycache_'.$this->apikey);
+		// If this is available . . .
+		if ($this->can_cache()) :
+			$this->cache = new FusionTableCache;
+		else :
+			$this->cache = null;
+		endif;
 	}
 
-	function shutdown () {
-		update_option('fusiontables_querycache_'.$this->apikey, $this->queryResults);
-	}
+	function can_cache () { return class_exists('FusionTableCache'); }
+	function has_cache () {	return !is_null($this->cache); }
+	function cache () { return $this->cache; }
 
-	private $queryResults = array();
 	function select ($query, $params = array()) {
 		$params = wp_parse_args($params, array(
 		"fresh" => false,
@@ -28,13 +31,10 @@ class FusionTable {
 		$query = urlencode($query);
 		$url = 'https://www.googleapis.com/fusiontables/v1/query?sql=' . $query . '&key=' . $this->apikey;
 
-		$resp = NULL;		
-		/*if (isset($this->queryResults[$url]) and !$params['fresh']) :
-			$cache = $this->queryResults[$url];
-			if ($cache['baked'] < $cache['stale']) :
-				$resp = $cache['bread'];
-			endif;
-		endif;*/
+		$resp = NULL;
+		if ($this->has_cache() and !$params['fresh']) :
+			$resp = $this->cache->get($url, $this->apikey);
+		endif;
 
 		if (is_null($resp)) :
 			$resp = wp_remote_request($url, array(
@@ -42,21 +42,16 @@ class FusionTable {
 			));
 			$this->apiQs++;
 
-			$baked = time();
-
-			// What would really be nice would be to use Cache-Control headers to determine settings here
-			// but good citizenship in the HTTP commonwealth will have to wait a little bit. Anyway Google
-			// FusionTables API sends back Cache-Control headers that indicate they don't really care much
-			$this->queryResults[$url] = array(
-				"baked" => $baked,
-				"stale" => $baked + FUSIONTABLE_CACHE_WINDOW,
-				"bread" => $resp
-			);
+			if ($this->has_cache()) :
+				$this->cache->put($url, $this->apikey, $resp);
+			endif;
 		endif;
 
 		if (is_wp_error($resp)) :
 			$ret = $resp;
 		elseif (200!=$resp['response']['code']) :
+			// Successful HTTP communication, but error code returned by API. Parse out error data.
+
 			$errorMsgs = array();
 			if (preg_match('|^application/json|i', $resp['headers']['content-type'])) : // JSON returned
 				$data = json_decode($resp['body']);
@@ -74,8 +69,10 @@ class FusionTable {
 			if (count($errorMsgs) > 0) :
 				$errorMessage .= ". API returned: &#8220;".implode("&#8221; / &#8220;", $errorMsgs)."&#8221;";
 			endif;
+			
 			$ret = new WP_Error('fusion-http', $errorMessage, $resp);
-		else :  // OK
+		else :
+			// HTTP OK, API returned OK
 			if (!preg_match('|^application/json|i', $resp['headers']['content-type'])) : // No JSON
 				$ret = new WP_Error('fusion-http', 'JSON transmission problem with FusionTable', $resp);
 			else :
@@ -107,10 +104,46 @@ class FusionTable {
 		"limit" => null,
 		"offset" => null,
 		"table" => null,
-		"where" => null,
+		"matches" => null,
 		"raw" => false,
 		"fresh" => false,
 		));
+
+		// Relocated this from front-end all the way back to the
+		// data source. This limits functionality but nothing was
+		// using it that I know of, and this way I don't have to
+		// write a full-on SQL expression parser for alternative
+		// data sources.
+		$whereClause = '';
+		if (is_array($params['matches'])) :
+			$whereClauses = array();
+			foreach ($params['matches'] as $col => $value) :
+				if (!is_array($value)) :
+					$value = array($value);
+				endif;
+			
+				if (count($value) > 1) :
+					$operator = 'IN';
+					$operand = "(";
+					if (count($value) > 0) :
+						$operand .= "'"
+						 .implode(
+						 	"', '",
+							array_map(function ($v) {
+						return $GLOBALS['wpdb']->escape(trim($v));
+							}, $value))
+						. "'";
+					endif;
+					$operand .= ")";
+				else :
+					$operator = '=';
+					$operand = "'".$wpdb->escape(reset($value))."'";
+				endif;
+			
+				$whereClauses[] = "$col $operator $operand";
+			endforeach;
+			$whereClause = ' WHERE '.implode(' AND ', $whereClauses);
+		endif;             
 
 		$limitClause = '';
 		if (is_numeric($params['limit'])) :
@@ -121,11 +154,10 @@ class FusionTable {
 			$limitClause = ' OFFSET '.$params['offset'].$limitClause;
 		endif;
 
-		$whereClause = '';
 		if (is_string($params['where'])) :
 			$whereClause = ' WHERE '.$params['where'];
 		endif;
-
+		
 		$fromClause = '';
 		if (is_null($params['table'])) :
 			$fromClause = ' FROM '.$this->defaultTable;
@@ -134,22 +166,13 @@ class FusionTable {
 		endif;
 
 		$data = $this->select('SELECT '.$params['cols'].$fromClause.$whereClause.$limitClause, $params);
+
 		if (is_wp_error($data) or $params['raw']) :
 			$ret = $data;
 		else :
-			$ret = array();
-			foreach ($data->rows as $row) :
-				$aRow = array();
-				foreach ($row as $idx => $col) :
-					$i = $idx;
-					if (isset($data->columns[$idx])) :
-						$i = $data->columns[$idx];
-					endif;
-					$aRow[$i] = $col;
-				endforeach;
-				$ret[] = $aRow;
-			endforeach;
+			$ret = $this->to_table_hash($data);
 		endif;
 		return $ret;
 	}
+
 }

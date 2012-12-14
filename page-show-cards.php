@@ -68,15 +68,25 @@ function options_filter_ul ($filters, $axis) {
 		$allLabelText = $filters['label-text']['all'];
 	endif;
 ?>
-<ul class="options-container options-for-<?php print $axis; ?>">
-<li><a href="#" id="filter-class-<?php print $axis; ?>-ALL" class="filter-class selected"><?php print $allLabelText; ?></a></li>
+<ul class="options-container options-for-<?php print $axis; ?><?php if (isset($filters['container-classes'])) : print ' '.$filters['container-classes']; endif; ?>">
+<li><a href="#" id="filter-class-<?php print $axis; ?>-ALL" class="filter-class show-when-ALL selected"><?php print $allLabelText; ?></a></li>
 <?php
 foreach ($filters['values'] as $vv => $N) :
 	$pair = array_map('urldecode', split("/", $vv, 2));
 	$label = reset($pair);
 	$value = end($pair);
+	
+	if (is_array($N) and isset($N['label'])) :
+		$label = $N['label'];
+	endif;
+	
+	$aClasses = array('filter-class');
+	if (is_array($N) and isset($N['values'])) :
+		$aClasses = array_merge($aClasses, array_map(function ($v) { return 'show-when-'.$v; }, $N['values']));
+	endif;
+	
 ?>
-<li><a href="#" id="filter-class-<?php print $prefix . $value; ?>" class="filter-class"><?php
+<li><a href="#" id="filter-class-<?php print $prefix . $value; ?>" class="<?php print implode(" ", $aClasses); ?>"><?php
 if (strlen(trim($label)) > 0) :
 	if (is_callable($lf)) :
 		$label = $lf($label);
@@ -103,36 +113,46 @@ print $label;
 // FILTERING: PREPARE OPTIONS FOR FILTERING LISTS. //
 /////////////////////////////////////////////////////
 
-/* $filters['state'] = array(
-	"values" => get_occupy_sandy_possible_values_for('get_state'),
-	"prefix" => 'state-',
-	"label-filter" => 'strtoupper',
-	'default' => 'Unlisted',
-); */
 $filters['type'] = array(
 	'values' => get_occupy_sandy_possible_values_for('get_type_classes'),
 	'prefix' => '',
 	'label-filter' => 'ucfirst',
 	'label-text' => array('all' => 'All Types', 'hub' => 'Distribution Centers', 'unknown' => 'Other'),
 );
+$filters['state'] = array(
+	"values" => get_occupy_sandy_possible_values_for('get_state_classes'),
+	"prefix" => '',
+	'label-text' => array('all' => 'All States'),
+	"label-filter" => 'strtoupper',
+	'default' => 'Unlisted',
+);
 $filters['region'] = array(
-	'values' => get_occupy_sandy_possible_values_for('get_region_classes'),
+	'values' => get_mapped_occupy_sandy_possible_values_for('get_region_classes', 'get_state_classes'),
 	'prefix' => '',
 	'default' => 'Other',
 	'label-text' => array('all' => 'All Locales'),
+	'container-classes' => "affected-by-state",
 );
 
 // Here is a way to clean up label text that you do not like.
 $filterMap['type']['text'] = array('unknown' => 'Other');
 
-// Force the unknown / other settings to bottom.
-//$filters['state']['values'][''] = 0;
-$filters['type']['values']['unknown'] = 0;
-$filters['region']['values']['Other/region-other'] = 0;
+// Sort these by # of cards, with blanks sorted down to the end.
+if (isset($filters['state']['values'][''])) :
+	$filters['state']['values'][''] = 0;
+endif;
+arsort($filters['state']['values']);
 
-//arsort($filters['state']['values']);
+$filters['type']['values']['unknown'] = 0;
 arsort($filters['type']['values']);
-arsort($filters['region']['values']);
+
+// Sort A-Z, with "Other" forced down to the end.
+uksort($filters['region']['values'], function ($left, $right) {
+		// Force "Other" to end of alpha order
+		$a = (('region-other'==$left) ? '{|}' : $left);
+		$b = (('region-other'==$right) ? '{|}' : $right);
+		return strcmp($a, $b);
+});
 
 //////////////////////////////////////////////////////
 // HEADER: This kind of page requires some scripts. //
@@ -152,19 +172,65 @@ function isotope_scriptage () {
 		jQuery('.filter-class').click ( function ( e ) {
 			var filterAxisClasses = jQuery(this).closest('.options-container').attr('class').split(/\s+/);
 			var filterAxis;
+			var showWhenID;
+			var filterHideInterval = 1000;
+			
 			for (var i = 0; i < filterAxisClasses.length; i++) {
 				if (r = filterAxisClasses[i].match(/^options-for-(.*)$/)) {
-					filterAxis = r[i];
-				}
+					filterAxis = r[1];
+				}				
 			}
 
+			var linkClasses = jQuery(this).attr('class').split(/\s+/);
+			
+			for (var i = 0; i < linkClasses.length; i++) {
+				if (r = linkClasses[i].match(/^show-when-(.*)$/)) {
+					showWhenID = r[1];
+				}
+			}
+			
+			var filtersOne2Many = jQuery('.options-container')
+				.filter('.affected-by-'+filterAxis)
+				.find('.filter-class');
+			
 			var filterClass = (jQuery(this).attr('id').replace(/^filter-class-/, ''));
 
 			// Rewrite the value for this specific axis in the filtering
 			if (filterClass.match(new RegExp('^' + filterAxis + '-ALL$')) ) {
 				isotopeFilter[filterAxis] = null;
+				filtersOne2Many.closest('li').removeClass('zapped').show(filterHideInterval);
+				
+				// Make sure that all sub-classes are dispalyed.
+				jQuery(this).closest('.options-container').find('.filter-class').closest('li').filter('.subset-limited').show(filterHideInterval).removeClass('subset-limited');
+				//.closest('li').show();
 			} else {
 				isotopeFilter[filterAxis] = '.' + filterClass;
+				
+				if (showWhenID && (jQuery('#filter-class-' + showWhenID).length > 0)) {
+					var filtersMany2One = jQuery('#filter-class-' + showWhenID)
+						.closest('.options-container')
+						.find('.filter-class');
+						
+					var possibleFilters = '.show-when-ALL, #filter-class-' + showWhenID;
+					filtersMany2One.filter(possibleFilters).closest('li').removeClass('subset-limited').show(filterHideInterval);
+					filtersMany2One.filter(':not('+possibleFilters+')').closest('li').addClass('subset-limited').hide(filterHideInterval);
+					jQuery('#filter-class-' + showWhenID).click();
+				}
+				
+				// Hide irrelevant filters.
+				if (filtersOne2Many.length > 0) {
+					var selector = '.show-when-ALL, .show-when-'+filterClass;
+					
+					filtersOne2Many.filter(selector).closest('li')
+						.removeClass('zapped').show(filterHideInterval);
+					filtersOne2Many.filter(':not('+selector+')').closest('li')
+						.addClass('zapped').hide(filterHideInterval);
+						
+					// Did we just hide the current filter? If so, reset to ALL.
+					if (filtersOne2Many.filter('.selected').closest('li').filter(':not(.zapped)').length == 0) {
+						filtersOne2Many.filter('.show-when-ALL').click();
+					}
+				}
 			}
 
 			// sigh

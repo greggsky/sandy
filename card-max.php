@@ -39,11 +39,8 @@ else :
 	endif;
 
 ?>
-<div class="<?php print implode(" ", $classes); ?>">
-<h5 class="cardType"><?php print $card->get_card_heading(); ?><?php if (strlen($state) > 0) :
-?> <span class="stateface stateface-replace stateface-<?php print strtolower($state); ?>"><?php print strtolower($state); ?></span><?php
-endif; ?></h5>
-<h2 class="cardName"><?php print $card->get_title(); ?></h2>
+<div class="<?php print implode(" ", $classes); ?> max">
+<h5 class="cardType"><?php print $card->get_card_heading(); ?></h5>
 
 <?php if (strlen($address) > 0) : ?>
 <h5 class="cardAddress"><?php print $address; ?></h5>
@@ -57,6 +54,10 @@ endif; ?></h5>
 <p class="cardStatus"><span>Status:</span> <?php print $status; ?></p>
 <?php endif; ?>
 
+<p class="cardShip">You can ship items right now through our wedding registries!
+<a class="button" href="http://interoccupy.net/occupysandy/wedding-registries/">Sandy's Wedding Registries</a>
+</p>
+
 <?php if (strlen($description) > 0) : ?>
 <p class="cardDetails"><span>Details:</span> <?php print $description; ?></p>
 <?php endif; ?>
@@ -69,9 +70,6 @@ endif; ?></h5>
 <h5 class="cardContact"><span>Contact:</span> <?php print $contact; ?></h5>
 <?php endif; ?>
 
-<?php if (strlen($link) > 0) : ?>
-<h5 class="cardLink"><a href="<?php print $link; ?>">More info</a></h5>
-<?php endif; ?>
 
 </div>
 <?php
