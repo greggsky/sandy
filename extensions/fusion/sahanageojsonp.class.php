@@ -1,5 +1,6 @@
 <?php
 require_once('sahanageofeature.class.php');
+require_once('occupysandydatasource.class.php');
 
 	class SahanaInvalidQuery extends Exception {
 		function __construct ($q, $message) {
@@ -15,7 +16,7 @@ require_once('sahanageofeature.class.php');
 		}
 	}
 
-class SahanaGeoJSONP {
+class SahanaGeoJSONP extends OccupySandyDataSource {
 	private $url;
 	private $text;
 	private $data;
@@ -108,7 +109,7 @@ class SahanaGeoJSONP {
 		return $feat;
 	} /* SahanaGeoJSONP::get_features () */
 
-	function data ($params = array()) {
+	public function data ($params = array()) {
 		$params = wp_parse_args($params, array(
 		"cols" => '*',
 		"limit" => null,
@@ -238,6 +239,11 @@ class SahanaGeoJSONP {
 			endif;
 		endif;
 
+		if (is_wp_error($data) or $params['raw']) :
+			$data = $data;
+		else :
+			$data = $this->to_table_hash($data);
+		endif;
 		return $data;
 	} /* SahanaGeoJSONP::data () */
 

@@ -1,6 +1,7 @@
 <?php
+require_once('occupysandydatasource.class.php');
 
-class FusionTable {
+class FusionTable extends OccupySandyDataSource {
 	private $apikey;
 	private $defaultTable;
 	private $apiQs = 0;
@@ -165,21 +166,11 @@ class FusionTable {
 		endif;
 
 		$data = $this->select('SELECT '.$params['cols'].$fromClause.$whereClause.$limitClause, $params);
+
 		if (is_wp_error($data) or $params['raw']) :
 			$ret = $data;
 		else :
-			$ret = array();
-			foreach ($data->rows as $row) :
-				$aRow = array();
-				foreach ($row as $idx => $col) :
-					$i = $idx;
-					if (isset($data->columns[$idx])) :
-						$i = $data->columns[$idx];
-					endif;
-					$aRow[$i] = $col;
-				endforeach;
-				$ret[] = $aRow;
-			endforeach;
+			$ret = $this->to_table_hash($data);
 		endif;
 		return $ret;
 	}
