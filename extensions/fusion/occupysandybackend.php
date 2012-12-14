@@ -23,6 +23,11 @@ class OccupySandyBackend {
 	function admin_init () {
 		global $wpdb;
 
+		// If test suite is available, hook it in so it can be activated on request.
+		if (is_readable(dirname(__FILE__).'/occupysandytests.php')) :
+			include(dirname(__FILE__).'/occupysandytests.php');
+		endif;
+
 		// Register FusionTables Backend settings
 		register_setting( 'os-fusiontables-settings', 'os_fusiontables_apikey' );
 		register_setting( 'os-fusiontables-settings', 'os_fusiontables_tableid' );
