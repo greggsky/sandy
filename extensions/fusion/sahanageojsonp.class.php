@@ -1,6 +1,13 @@
 <?php
 require_once('sahanageofeature.class.php');
 
+	class SahanaInvalidQuery extends Exception {
+		function __construct ($q, $message) {
+			// FIXME: This sucks.
+			parent::__construct('Invalid Query to Sahana Data Source: '.$message." / Query: ".json_encode($q));
+		}
+	}
+
 	class SahanaExpectedFeature extends Exception {
 		function __construct ($f) {
 			// FIXME: This sucks.
@@ -88,7 +95,7 @@ class SahanaGeoJSONP {
 		"limit" => null,
 		"offset" => null,
 		"table" => null,
-		"where" => null,
+		"matches" => null,
 		"raw" => false,
 		"fresh" => false,
 		));
@@ -99,7 +106,12 @@ class SahanaGeoJSONP {
 		if (is_array($ff)) :
 			if (count($ff) > 0) :
 				$cols = array();
+
+				// Initialize.
 				$data->kind = 'sahanajsonp#sqlresponse';
+				$data->columns = array();
+				$data->rows = array();
+
 				foreach ($ff as $f) :
 					$feat = new SahanaGeoFeature($f);
 					$row = $feat->to_table($cols);
@@ -127,6 +139,83 @@ class SahanaGeoJSONP {
 				$limit = (is_null($params['limit']) ? count($data->rows) - $offset : $params['limit']);
 
 				$data->rows = array_slice($data->rows, $offset, $limit);
+			endif;
+
+			// Apply WHERE filter
+			if (is_array($params['matches'])) :
+				// Should be an associative array. Column names
+				// as the keys; value(s) that MUST be matched as
+				// the values. Scalar interpreted as a simple
+				// equality match; array interpreted as an
+				// element-of match.
+				foreach ($params['matches'] as $col => $acceptable) :
+					if (!is_array($acceptable)) :
+						$acceptable = array($acceptable);
+					endif;
+
+					$data->rows = array_filter($data->rows,
+					function ($r) use ($col, $acceptable, &$data) {
+						// Get index to check
+						$idx = array_search($col, $data->columns);
+
+						// If the column doesn't exist, treat
+						// the value as NULL.
+						if (false === $idx) :
+							$cell = NULL;
+						else :
+							$cell = $r[$idx];	
+						endif;
+
+						// Use array_reduce so if we need
+						// some sophisticated matching we
+						// can code it in easily.
+						// Right now we just make it
+						// case-insensitive and strip leading
+						// and trailing whitespace
+						return array_reduce(
+							$acceptable,
+							function ($running, $v) use ($cell) {
+								if (is_null($running)) :
+									$running = false;
+								endif;
+
+								return (
+									$running or
+									strtolower(trim($cell)) == strtolower(trim($v))
+								);
+							}
+						);
+					});
+				endforeach;
+			endif;
+
+			// Apply column selection
+			if (!is_null($params['cols']) and $params['cols'] != '*') :
+				$selected = array_map('trim', preg_split('/\s*,\s*/', $params['cols']));
+				
+				$indexOf = array_flip($data->columns);
+				$columns = array();
+
+				foreach ($selected as $col) :
+					if (isset($indexOf[$col])) :
+						$columns[$col] = $indexOf[$col];
+					else :
+						throw new SahanaInvalidQuery($params, "Column does not exist");
+					endif;
+				endforeach;
+
+				foreach ($data->rows as $idx => $value) :
+
+					$row = array();
+
+					foreach ($columns as $cell) :
+						$row[$cell] = (isset($value[$cell]) ? $value[$cell] : NULL);
+					endforeach;
+					
+					$data->rows[$idx] = $row;
+
+				endforeach;
+				$data->columns = array_flip($columns);
 			endif;
 		endif;
 

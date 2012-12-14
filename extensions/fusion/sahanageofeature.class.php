@@ -52,8 +52,8 @@ class SahanaGeoFeature {
 			$ret = array();
 			$myrow = array();
 			foreach ($this->properties() as $prop => $val) :
-				// If we have a position from a previous table,
-				// use that to normalize positions in returned row
+				// If we have a position from a previous table, use
+				// that to normalize positions in returned row
 				if (isset($cols[$prop])) :
 					$idx = $cols[$prop];
 				else :
