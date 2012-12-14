@@ -9,6 +9,14 @@ class OccupySandyDataSource {
 		return NULL;
 	}
 
+	public function has_cache () {
+		return false;
+	}
+
+	public function cache () {
+		return NULL;
+	}
+
 	public function to_table_hash ($data) {
 		$ret = array();
 		foreach ($data->rows as $row) :

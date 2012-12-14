@@ -82,7 +82,7 @@ function the_occupy_sandy_cards ($params = array()) {
 	"matches" => null,
 	"template-class" => null,
 	));
-		
+
 	$cards = get_occupy_sandy_cards($params);
 	if (is_wp_error($cards)) :
 		$cards = array($cards);
