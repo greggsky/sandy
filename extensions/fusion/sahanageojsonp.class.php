@@ -16,13 +16,32 @@ require_once('sahanageofeature.class.php');
 	}
 
 class SahanaGeoJSONP {
+	private $url;
 	private $text;
 	private $data;
 
 	function __construct ($data) {
-		if (is_string($data)) : // Just supplied some JSON or JSONP in a string
+		// This could be a URL, an wp_remote_request() return value,
+		// or just some JSON/JSONP in a string.
+
+		if (is_string($data)) :
+			// See if it parses.
 			$this->text = $data;
-		elseif (is_array($data) and $this->is_jsonp($data)) : // Supplied a HTTP reply
+			$this->parse();
+
+			if (is_null($this->data)) :
+				// Does it look like a URL?
+				$bits = parse_url($this->text);
+				if (isset($bits['scheme'])) :
+					$this->text = NULL;
+					$this->url = $data;
+					$data = wp_remote_request($this->url);
+				endif;
+			endif;
+		endif;
+
+		if (is_null($this->data) and $this->is_jsonp($data)) :
+			// Got a HTTP reply from wp_remote_request
 			$this->text = $data['body'];
 		else :
 			$this->text = NULL;
