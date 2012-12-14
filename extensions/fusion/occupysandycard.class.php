@@ -145,7 +145,7 @@ class OccupySandyCard {
 		return ($this->has_type('volunteer') or $this->is_distro_center());
 	}
 	function is_distro_center () {
-		return $this->has_type('main distribution center');
+		return $this->has_type('(main\s+)?distribution\s*center');
 	}
 	function is_other_type () {
 		return !($this->is_drop_off() or $this->is_volunteer() or $this->is_distro_center());
