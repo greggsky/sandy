@@ -137,7 +137,9 @@ The function returns a table containing all the records selected from your Fusio
 You can alter what gets returned by sending different parameters in the `$params` argument:
 
 	$data = get_occupy_sandy_data(array("limit" => 10, "offset" => 10));
-	$data = get_occupy_sandy_data(array("where" => "Region='Sunset Park'"));
+	$data = get_occupy_sandy_data(array(
+		"matches" => array("Region" => 'Sunset Park')
+	));
 	$data = get_occupy_sandy_data(array("cols" => "Link"));
 
 etc. Here are the parameters you can use:
@@ -150,7 +152,19 @@ etc. Here are the parameters you can use:
 
 * `table`: Specify another Fusion Table table ID to query, instead of the default ID you specified in your WordPress admin interface.
 
-* `where`: Provide an SQL-style `WHERE` query to return a limited subset of the data records, filtered by their content.
+* `matches`: Only return the subset of data records that match the criteria specified in an associative array. The keys of the array should be column names to check the content of. The values for each key should be one or more values that are acceptable values for that column. So, for example, to return only records whose Region is "Sunset Park", use:
+
+	$data = get_occupy_sandy_data(array(
+		"matches" => array("Region" => 'Sunset Park')
+	));
+
+   You can supply an array of acceptable values:
+
+	$data = get_occupy_sandy_data(array(
+		"matches" => array("Region" => array('Sunset Park', 'Rockaway'))
+	));
+
+   If you provide more than one column to match, then it will return only those records where ALL of the columns listed match one or more of the acceptable values you provided for those columns.
 
 * `raw`: Return the results in the raw format that Google's Fusion Table API returns them, rather than converting them into a set of associative arrays. (You'll need to use `var_dump()` to see the raw format that Google uses.)
 

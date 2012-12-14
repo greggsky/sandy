@@ -82,33 +82,7 @@ function the_occupy_sandy_cards ($params = array()) {
 	"matches" => null,
 	"template-class" => null,
 	));
-	
-	if (is_array($params['matches'])) :
-		$whereClauses = array();
-		foreach ($params['matches'] as $col => $value) :
-			if (!is_array($value)) :
-				$value = array($value);
-			endif;
-			
-			if (count($value) > 1) :
-				$operator = 'IN';
-				$operand = "(";
-				if (count($value) > 0) :
-				$operand .= "'" . implode("', '", array_map(function ($v) {
-						return $GLOBALS['wpdb']->escape(trim($v));
-				}, $value)) . "'";
-				endif;
-				$operand .= ")";
-			else :
-				$operator = '=';
-				$operand = "'".$wpdb->escape(reset($value))."'";
-			endif;
-			
-			$whereClauses[] = "$col $operator $operand";
-		endforeach;
-		$params['where'] = implode(' AND ', $whereClauses);
-	endif;                
-	
+		
 	$cards = get_occupy_sandy_cards($params);
 	if (is_wp_error($cards)) :
 		$cards = array($cards);
